@@ -1,0 +1,87 @@
+/* Nav.css */
+
+body {
+  margin: 0;
+  background-color: black; /* Set the complete background to black */
+  color: white; /* Set default text color to white */
+  padding-top: 60px; /* Prevent content overlap with the fixed header */
+}
+
+header {
+  position: fixed;
+  color: white; /* Keep the header at the top */
+  top: 0; /* Align the header to the top */
+  left: 0; /* Align the header to the left */
+  right: 0; /* Align the header to the right */
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav */
+  align-items: center; /* Align items vertically */
+  padding: 10px 20px; /* Padding around header */
+  background-color: black; /* Set background color for the header */
+  z-index: 1000; /* Ensure the header is on top of other content */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* Center logo and heading vertically */
+}
+
+.logo-image {
+  width: 50px; /* Adjust logo size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 30px; /* Space between logo and heading */
+}
+
+.nav {
+  display: flex;
+  gap: 20px; /* Space between nav links */
+}
+
+.nav a {
+  position: relative; /* Position relative to allow absolute positioning of the dot */
+  color: #f0f0f0; /* Nav link color */
+  text-decoration: none; /* Remove underline from links */
+  font-size: 1.2rem; /* Font size */
+  padding: 8px 16px; /* Padding for links */
+  border-radius: 5px; /* Rounded corners */
+  transition: color 0.3s; /* Smooth transition for text color */
+}
+
+.nav a::after {
+  content: ""; /* Create a pseudo-element */
+  position: absolute; /* Position it absolutely */
+  left: 50%; /* Center the dot horizontally */
+  bottom: -10px; /* Position the dot below the link */
+  width: 15px; /* Dot width */
+  height: 5px; /* Dot height */
+  background-color: #ffffff; /* Color of the dot */
+  border-radius: 30%; /* Make it circular */
+  transform: translateX(-50%) translateY(0); /* Center the dot */
+  transition: transform 0.3s, width 0.3s, opacity 0.3s; /* Smooth transitions */
+  opacity: 0; /* Start with the dot hidden */
+}
+
+.nav a:hover {
+  color: #fff; /* Change text color on hover */
+}
+
+.nav a:hover::after {
+  transform: translateX(-50%) translateY(-5px); /* Move the dot up on hover */
+  opacity: 1; /* Show the dot */
+}
+
+.nav a.active::after {
+  width: 60%; /* Line width when active */
+  height: 5px; /* Line height */
+  background-color: #ababab; /* Color of the line */
+  border-radius: 10px;/* Remove border-radius for the line effect */
+  transform: translateX(-50%) translateY(-5px); /* Center the line below the link */
+  opacity: 1; /* Ensure the line is visible when active */
+}
+
+.nav a.active {
+  color: blue; /* Text color for active link */
+}
+
+

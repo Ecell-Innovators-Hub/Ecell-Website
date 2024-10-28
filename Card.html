@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You Message</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+      animation: gradientAnimation 15s ease infinite;
+      background: linear-gradient(45deg, #f9f4ef, #e6e6e6);
+      background-size: 400% 400%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 60px;
+    }
+
+    .thank-you {
+      font-family: 'Great Vibes', cursive;
+      font-size: 64px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .sub-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #777;
+      font-weight: 500;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .email-link {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-section {
+      margin-top: 30px;
+    }
+
+    .contact-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-icons img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+      .thank-you {
+        font-size: 48px;
+      }
+      .sub-text {
+        font-size: 18px;
+      }
+      .message {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://dl.dropboxusercontent.com/scl/fi/muhofnwtfub9y6lg518ng/download-removebg-preview.png?rlkey=qqd1cngqd8xjybzclbvo1q0zh&st=f1d2eemm&dl=0" alt="Vishnu Universal Learning" class="logo">
+      <img src="https://dl.dropboxusercontent.com/scl/fi/cio7w143fxprelb1hjsph/logo.png?rlkey=noslm6rt05p1328guepru4erg&st=ilm9yv1r&dl=0" alt="E-Cell Vishnu Institute of Technology" class="logo">
+    </div>
+
+    <div class="thank-you">Congratulations</div>
+    <div class="sub-text">You Are Onboard</div>
+
+    <p class="message">
+    Dear {{name}}
+
+Congratulations, on selecting for the {{role}} is a testament to your dedication, hard work, and passion. This achievement marks the beginning of an exciting journey where your skills and leadership will undoubtedly make a lasting impact. Wishing you great success and looking forward to all the amazing things you’ll accomplish! <br><br>
+     
+<br>
+      If you have any questions in the meantime, feel free to reach out to us at <br>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=e-cell@vishnu.edu.in" class="email-link">E-cell@vishnu.edu.in</a> 
+      or call us at <a href="tel:+919490538442" class="email-link">+91 94905 38442</a>. <br>
+      Looking forward to connecting with you soon!
+    </p>
+
+    <div class="contact-section">
+      <div class="contact-heading">Contact Us</div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ecell_vitb" target="_blank">
+          <img src="https://dl.dropboxusercontent.com/scl/fi/l8o8j34zrad38ub0o9pd2/insta.png?rlkey=rhyspwig5juryknurd1gphd3k&st=m4o8isu3&dl=0" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/company/ecellvitb" target="_blank">
+          <img src="https://dl.dropboxusercontent.com/scl/fi/g72po3qcxgwu6kp924dog/linkedin.png?rlkey=ucma4s551gixixuk89xhdlkpm&st=3otueebh&dl=0" alt="LinkedIn">
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=e-cell@vishnu.edu.in">
+          <img src="https://dl.dropboxusercontent.com/scl/fi/oe39qb2jb2a85woc29do6/gmail.png?rlkey=nnj8c1y90qrms6dyy9gpbr3le&st=jgqasgm4&dl=0" alt="Email">
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
