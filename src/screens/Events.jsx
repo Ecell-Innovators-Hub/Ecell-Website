@@ -1,10 +1,10 @@
 import React from "react";
+import Event from "../components/Event";
 
 function Events() {
   return (
     <div>
-      
-      <div>Hello Everyone. This is the Events Page</div>
+      <Event />
     </div>
   );
 }

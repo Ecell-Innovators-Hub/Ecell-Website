@@ -84,7 +84,7 @@ const useTimer = (unit) => {
         { duration: 0.35 }
       );
     }
-  }, [animate, unit]);
+  }, [animate, unit, ref]);
 
   useEffect(() => {
     intervalRef.current = setInterval(handleCountdown, 1000);
