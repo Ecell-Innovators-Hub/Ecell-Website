@@ -4,7 +4,8 @@ body {
   margin: 0;
   background-color: black; /* Set the complete background to black */
   color: white; /* Set default text color to white */
-  padding-top: 60px; /* Prevent content overlap with the fixed header */
+  padding-top: 60px;
+  overflow-x: hidden; /* Prevent content overlap with the fixed header */
 }
 
 header {
@@ -75,7 +76,7 @@ header {
   width: 60%; /* Line width when active */
   height: 5px; /* Line height */
   background-color: #ababab; /* Color of the line */
-  border-radius: 10px;/* Remove border-radius for the line effect */
+  border-radius: 10px; /* Remove border-radius for the line effect */
   transform: translateX(-50%) translateY(-5px); /* Center the line below the link */
   opacity: 1; /* Ensure the line is visible when active */
 }
@@ -83,5 +84,3 @@ header {
 .nav a.active {
   color: blue; /* Text color for active link */
 }
-
-
