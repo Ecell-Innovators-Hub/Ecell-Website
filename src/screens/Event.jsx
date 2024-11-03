@@ -1,9 +1,7 @@
 import React from "react";
 import "./Event.css";
-import ShiftingCountdown from "./../components/Countdown.jsx";
-import logo from "../assets/images/instagram.png";
-import mail from "../assets/images/gmail.png";
-import linkedin from "../assets/images/linkedin.png";
+import ShiftingCountdown from "../components/Countdown.jsx";
+import logo from "../assets/images/Spark_Tank.jpeg";
 
 function Event() {
   return (
@@ -66,18 +64,16 @@ function Event() {
         <div className="event-organizers">
           <div className="members">
             <h5 className="role">Student Coordinator</h5>
-            <div className="organizer-info organizer-card">
-              <img src={mail} alt="Gmail" className="simg" />
-              <p>N Phallu</p>
-              <p>+91 738 613 0954</p>
+            <div className="organizer-info organizer-card Img1">
+              <p>N Phanindra</p>
+              <p>+91 84765987</p>
               <p>22pa1a05a1@vishnu.edu.in</p>
               <p>CSE Dept.</p>
             </div>
           </div>
           <div className="members">
             <h5 className="role">Student Organizer</h5>
-            <div className="organizer-info organizer-card">
-              <img src={linkedin} alt="Linkedin" className="simg" />
+            <div className="organizer-info organizer-card Img2">
               <p>A Bhuapati</p>
               <p>+91 738 613 0954</p>
               <p>22pa1a05a1@vishnu.edu.in</p>

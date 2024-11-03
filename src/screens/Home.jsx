@@ -26,6 +26,8 @@ function Home() {
               🔔
             </span>
           </p>
+          <p className="Date" >Event Date : 01/12/2024</p>
+          <p className="Date" >Registration Last Date : 21/11/2024</p>
         </div>
       </div>
     </div>

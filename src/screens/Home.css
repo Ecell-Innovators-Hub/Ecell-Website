@@ -4,9 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center; /* Centers event-left vertically */
-
   color: #fff;
   background-color: #000;
+  margin-bottom: 60px;
   /* Make container full viewport height for vertical centering */
 }
 
@@ -60,4 +60,9 @@
 .Heading {
   margin-left:30px;
   margin-bottom: 50px;
+}
+
+.Date{
+  font-weight: bold;
+  font-size: medium;
 }

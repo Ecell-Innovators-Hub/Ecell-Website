@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
-import tinkerObject from "../assets/objects/tinker.obj";
+import tinkerObject from "../assets/objects/logo1.obj";
 
 function ThreeDModel() {
   const mountRef = useRef(null);
@@ -33,14 +33,16 @@ function ThreeDModel() {
     scene.add(directionalLight);
 
     const objLoader = new OBJLoader();
+    let loadedObject = null;
+
     objLoader.load(
       tinkerObject,
       (object) => {
-        object.scale.set(0.009, 0.009, 0.004);
+        object.scale.set(0.009, 0.009, 0.02);
         object.position.set(0, -1, -1);
 
         const material = new THREE.MeshStandardMaterial({
-          color: 0xffffff,
+          color: 0xf4faff,
         });
 
         object.traverse((child) => {
@@ -51,9 +53,15 @@ function ThreeDModel() {
         });
 
         scene.add(object);
+        loadedObject = object;
 
         const animate = () => {
           requestAnimationFrame(animate);
+
+          if (loadedObject) {
+            loadedObject.rotation.y += 0.01; // Adjust rotation speed here
+          }
+
           renderer.render(scene, camera);
         };
         animate();

@@ -1,0 +1,176 @@
+/* Overall container */
+.new-event-container {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  max-width: 100%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Centered Title */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #ffa500;
+}
+
+/* Form section layout */
+.form-section {
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.left-column,
+.right-column {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling - left-aligned */
+.left-column label,
+.right-column label {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  display: block; /* Align with input width */
+}
+
+.choose-image {
+  display: inline-block; /* Removed quotes */
+  margin-top: 15px;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+  font-size: small;
+  color: #ffd700 !important;
+  border: 1px dashed #ffd700;
+  text-align: center;
+}
+
+.choose-image:hover {
+  background-color: #ffd700;
+  color: #000 !important;
+}
+
+/* Input field styling matching the image */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="file"],
+textarea {
+  width: 100%; /* Full width */
+  padding: 10px;
+  background: none;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  margin-top: 5px;
+}
+
+/* Focus effect for inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="file"]:focus,
+textarea:focus {
+  border-color: #ffd700;
+  outline: none;
+}
+
+/* Textarea styling */
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Date-time field layout */
+.date-time {
+  display: flex;
+  gap: 40px;
+  width: 90%;
+}
+
+/* Radio buttons layout */
+.radio-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.radio-buttons label {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+
+/* Person section styling */
+.person-section {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: none;
+}
+
+/* Consistent spacing between label and input */
+.left-column label,
+.right-column label,
+.left-column input,
+.right-column input,
+.left-column textarea,
+.right-column textarea {
+  margin-bottom: 10px;
+}
+
+/* Add person button styling */
+.add-person {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+  color: #ffd700;
+  border: 1px dashed #ffd700;
+}
+
+.add-person:hover {
+  background-color: #ffd700;
+  color: #000;
+}
+
+/* Add event button styling */
+.add-event-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.add-event-button:hover {
+  background-color: #ffa500;
+}
+
+* {
+  box-sizing: border-box;
+}
