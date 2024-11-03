@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/images/white_logo.png"; 
+// import logo from "../assets/images/white_logo.png";
 import "./Nav.css";
 
 function Navigator() {
   return (
     <header>
       <div className="logo">
-        <img src={logo} alt="E-CELL Logo" className="logo-image" />
         <h1>E-CELL</h1>
       </div>
       <nav className="nav">

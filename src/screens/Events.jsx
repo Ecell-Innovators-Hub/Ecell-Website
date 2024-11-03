@@ -1,10 +1,11 @@
 import React from "react";
-import Event from "../components/Event";
+import Event from "./Event";
+
 
 function Events() {
   return (
     <div>
-      <Event />
+      <Event/>
     </div>
   );
 }

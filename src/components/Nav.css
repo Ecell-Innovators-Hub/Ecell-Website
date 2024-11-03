@@ -82,5 +82,5 @@ header {
 }
 
 .nav a.active {
-  color: blue; /* Text color for active link */
+  color: #ffc23c; /* Text color for active link */
 }
