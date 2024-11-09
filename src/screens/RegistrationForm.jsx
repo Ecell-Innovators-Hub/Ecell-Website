@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import "./RegistrationForm.css";
+import { db } from "../firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const eventId = location.state?.eventId;
+
   const [questions, setQuestions] = useState([
     { question: "", type: "Text", optionsCount: 0, options: [] },
   ]);
@@ -45,9 +52,26 @@ const RegistrationForm = () => {
     setQuestions(updatedQuestions);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", questions);
+    try {
+      // Map questions to Firestore-compatible structure
+      const formFields = questions.map((q) => ({
+        label: q.question,
+        type: q.type.toLowerCase(),
+        required: true,
+        ...(q.type !== "Text" && { options: q.options }),
+      }));
+      console.log(eventId);
+      // Store form fields in the event document in Firestore
+      const eventDocRef = doc(db, "events", eventId);
+      await setDoc(eventDocRef, { formFields }, { merge: true });
+
+      console.log("Form fields saved successfully!");
+      navigate("/reg", { state: { eventId: eventId } });
+    } catch (error) {
+      console.error("Error saving form fields:", error);
+    }
   };
 
   return (
@@ -55,7 +79,11 @@ const RegistrationForm = () => {
       <h2>Create Registration Form</h2>
 
       {questions.map((q, questionIndex) => (
-        <div key={questionIndex} className="question-container" data-question-number={`Question ${questionIndex + 1}`}>
+        <div
+          key={questionIndex}
+          className="question-container"
+          data-question-number={`Question ${questionIndex + 1}`}
+        >
           <div className="group">
             <div className="input-group question-field">
               <label>Enter your Question</label>
@@ -88,24 +116,27 @@ const RegistrationForm = () => {
 
           {(q.type === "Checkbox" || q.type === "Radio") && (
             <div>
-              <label>No. of Options:</label>
-              <select
-                className="options-count"
-                value={q.optionsCount}
-                onChange={(e) =>
-                  handleOptionsCountChange(
-                    questionIndex,
-                    parseInt(e.target.value)
-                  )
-                }
-                required
-              >
-                {[...Array(10).keys()].map((num) => (
-                  <option key={num + 2} value={num + 2}>
-                    {num + 2}
-                  </option>
-                ))}
-              </select>
+              <div className="container">
+                <label>No. of Options:</label>
+                <select
+                  className="options-count"
+                  value={q.optionsCount}
+                  onChange={(e) =>
+                    handleOptionsCountChange(
+                      questionIndex,
+                      parseInt(e.target.value)
+                    )
+                  }
+                  required
+                >
+                  {[...Array(10).keys()].map((num) => (
+                    <option key={num + 2} value={num + 2}>
+                      {num + 2}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {Array.from({ length: q.optionsCount }).map((_, optionIndex) => (
                 <div key={optionIndex} className="option-input">
                   <label>{`Option ${optionIndex + 1}`}</label>

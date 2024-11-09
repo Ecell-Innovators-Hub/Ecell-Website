@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-// import logo from "../assets/images/white_logo.png";
 import "./Nav.css";
 
 function Navigator() {
+  // State to handle the menu toggle for mobile
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Function to toggle menu visibility
+  const handleToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header>
       <div className="logo">
         <h1>E-CELL</h1>
       </div>
-      <nav className="nav">
+      {/* Toggle button for mobile menu */}
+      <div className="menu-toggle" onClick={handleToggle}>
+        ☰
+      </div>
+      {/* Conditionally apply 'active' class based on isMenuOpen state */}
+      <nav className={`nav ${isMenuOpen ? "active" : ""}`}>
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? "active" : "")}

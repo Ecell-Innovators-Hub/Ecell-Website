@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import "./NewEvent.css";
 import Cropper from "react-easy-crop";
 import addLogo from "./../assets/images/Add_image.png";
+import { db, storage } from "../firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 const NewEvent = () => {
+  const navigate = useNavigate();
   const [persons, setPersons] = useState([
     {
       personType: "student",
@@ -61,41 +66,67 @@ const NewEvent = () => {
     );
     setPersons(updatedPersons);
   };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      // Upload main image
+      const mainImageRef = ref(storage, `events/${mainImage.name}`);
+      await uploadBytes(mainImageRef, mainImage);
+      const mainImageUrl = await getDownloadURL(mainImageRef);
 
-    // Log form data, including the main image details
-    console.log("Form data:", {
-      mainImage: mainImage
-        ? {
-            name: mainImage.name,
-            type: mainImage.type,
-            size: mainImage.size,
+      // Prepare coordinators data with image URLs
+      const coordinators = await Promise.all(
+        persons.map(async (person) => {
+          if (person.image) {
+            const personImageRef = ref(
+              storage,
+              `coordinators/${person.image.name}`
+            );
+            await uploadBytes(personImageRef, person.image);
+            const personImageUrl = await getDownloadURL(personImageRef);
+            return {
+              ...person,
+              image: {
+                url: personImageUrl,
+                name: person.image.name,
+                type: person.image.type,
+                size: person.image.size,
+              },
+            };
           }
-        : "No main image uploaded",
-      persons: persons.map((person, index) => ({
-        ...person,
-        index: index + 1,
-        image: person.image
-          ? {
-              name: person.image.name,
-              type: person.image.type,
-              size: person.image.size,
-            }
-          : "No image uploaded",
-      })),
-      location,
-      firstPrize,
-      secondPrize,
-      thirdPrize,
-      eventName,
-      eventDate,
-      eventTime,
-      eventDescription,
-    });
+          return person;
+        })
+      );
 
-    // Refresh the page after logging
+      // Add event data with coordinators to Firestore
+      const eventDocRef = doc(collection(db, "events"));
+      await setDoc(eventDocRef, {
+        docid: eventDocRef.id,
+        eventName,
+        department,
+        description: eventDescription,
+        date: eventDate,
+        time: eventTime,
+        location,
+        firstPrize,
+        secondPrize,
+        thirdPrize,
+        mainImage: {
+          url: mainImageUrl,
+          name: mainImage.name,
+          type: mainImage.type,
+          size: mainImage.size,
+        },
+        coordinators,
+      });
+
+      console.log("Event and coordinators saved successfully!");
+
+      // Navigate to /regform with the event document ID
+      navigate("/regform", { state: { eventId: eventDocRef.id } });
+    } catch (error) {
+      console.error("Error saving event:", error);
+    }
   };
 
   const [location, setLocation] = useState("");
@@ -206,6 +237,22 @@ const NewEvent = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+
+          <label>Department</label>
+          <select
+            required
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+          >
+            <option value="" disabled>
+              Select Department
+            </option>
+            <option value="HR">HR</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+            <option value="IT">IT</option>
+            {/* Add more options as needed */}
+          </select>
 
           <label>1st Prize</label>
           <input
