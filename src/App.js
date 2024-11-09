@@ -6,18 +6,23 @@ import Home from "./screens/Home"; // Your Home component
 import Events from "./screens/Events"; // Your Events component
 import NewEvent from "./screens/NewEvent";
 import RegistrationForm from "./screens/RegistrationForm";
+import Registrations from "./screens/Registrations";
 
 const App = () => {
   return (
     <Router>
       <Nav /> {/* Add the Navigator component here */}
-      <div style={{ paddingTop: "60px" }}> {/* Padding to prevent content overlap with fixed header */}
+      <div style={{ paddingTop: "60px" }}>
+        {" "}
+        {/* Padding to prevent content overlap with fixed header */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/regform" element={<RegistrationForm />} />
-        </Routes> {/* Corrected closing tag */}
+          <Route path="/reg" element={<Registrations />} />
+        </Routes>{" "}
+        {/* Corrected closing tag */}
       </div>
     </Router>
   );

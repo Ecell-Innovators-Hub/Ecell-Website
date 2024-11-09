@@ -10,77 +10,134 @@ body {
 
 header {
   position: fixed;
-  color: white; /* Keep the header at the top */
-  top: 0; /* Align the header to the top */
-  left: 0; /* Align the header to the left */
-  right: 0; /* Align the header to the right */
+  color: white;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
-  justify-content: space-between; /* Space between logo and nav */
-  align-items: center; /* Align items vertically */
-  padding: 10px 20px; /* Padding around header */
-  background-color: black; /* Set background color for the header */
-  z-index: 1000; /* Ensure the header is on top of other content */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: black;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  display: none;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  margin-left: 10px; /* Center logo and heading vertically */
+  margin-left: 10px;
 }
 
 .logo-image {
-  width: 50px; /* Adjust logo size */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 30px; /* Space between logo and heading */
+  width: 50px;
+  height: auto;
+  margin-right: 20px;
 }
 
 .nav {
   display: flex;
-  gap: 20px; /* Space between nav links */
+  gap: 20px;
 }
 
 .nav a {
-  position: relative; /* Position relative to allow absolute positioning of the dot */
-  color: #f0f0f0; /* Nav link color */
-  text-decoration: none; /* Remove underline from links */
-  font-size: 1.2rem; /* Font size */
-  padding: 8px 16px; /* Padding for links */
-  border-radius: 5px; /* Rounded corners */
-  transition: color 0.3s; /* Smooth transition for text color */
+  position: relative;
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: color 0.3s;
 }
 
 .nav a::after {
-  content: ""; /* Create a pseudo-element */
-  position: absolute; /* Position it absolutely */
-  left: 50%; /* Center the dot horizontally */
-  bottom: -10px; /* Position the dot below the link */
-  width: 15px; /* Dot width */
-  height: 5px; /* Dot height */
-  background-color: #ffffff; /* Color of the dot */
-  border-radius: 30%; /* Make it circular */
-  transform: translateX(-50%) translateY(0); /* Center the dot */
-  transition: transform 0.3s, width 0.3s, opacity 0.3s; /* Smooth transitions */
-  opacity: 0; /* Start with the dot hidden */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 15px;
+  height: 5px;
+  background-color: #ffffff;
+  border-radius: 30%;
+  transform: translateX(-50%);
+  transition: transform 0.3s, width 0.3s, opacity 0.3s;
+  opacity: 0;
 }
 
 .nav a:hover {
-  color: #fff; /* Change text color on hover */
+  color: #fff;
 }
 
 .nav a:hover::after {
-  transform: translateX(-50%) translateY(-5px); /* Move the dot up on hover */
-  opacity: 1; /* Show the dot */
+  transform: translateX(-50%) translateY(-5px);
+  opacity: 1;
 }
 
 .nav a.active::after {
-  width: 60%; /* Line width when active */
-  height: 5px; /* Line height */
-  background-color: #ababab; /* Color of the line */
-  border-radius: 10px; /* Remove border-radius for the line effect */
-  transform: translateX(-50%) translateY(-5px); /* Center the line below the link */
-  opacity: 1; /* Ensure the line is visible when active */
+  width: 60%;
+  height: 5px;
+  background-color: #ababab;
+  border-radius: 10px;
+  transform: translateX(-50%) translateY(-5px);
+  opacity: 1;
 }
 
 .nav a.active {
-  color: #ffc23c; /* Text color for active link */
+  color: #ffc23c;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .logo-image {
+    width: 40px; /* Reduce logo size on smaller screens */
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav {
+    display: none; /* Hide the nav links initially on mobile */
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .nav.active {
+    display: flex; /* Show the nav links when active */
+  }
+
+  .nav a {
+    font-size: 1rem;
+    padding: 10px;
+    text-align: left;
+  }
+
+  /* Menu icon for mobile */
+  .menu-toggle {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: 1px solid #ffd700;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+}
+
+/* Optional hover effect for menu icon */
+.menu-toggle:hover {
+  background-color: #ffd700;
+  color: black;
 }
