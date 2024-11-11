@@ -1,21 +1,38 @@
-.event-container {
+.eventid-container {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Centers event-left vertically */
+  align-items: center; 
   color: #fff;
   background-color: #000;
-  /* Make container full viewport height for vertical centering */
+  height: 100vh;
 }
 
-.event-left {
+.eventid-left {
   width: 40%;
 }
 
-.event-right {
+.eventid-right {
   width: 60%;
   text-align: center;
 }
-.prizes {
+
+@media (max-width: 1024px) {
+  
+  .eventid-left, .eventid-right {
+    width: 50%;
+  }
+  .prizesid {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .eventid-image {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.prizesid {
   text-align: center;
   margin-top: 20px;
   font-size: 20px;
@@ -25,12 +42,12 @@
   border-radius: 10px;
 }
 
-.prizes span {
+.prizesid span {
   font-size: 28px;
   margin-right: 8px;
 }
 
-.event-image {
+.eventid-image {
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -39,19 +56,20 @@
   margin: 0 auto;
 }
 
-.event-name {
+.eventid-name {
   text-align: center;
   font-size: 24px;
   margin-top: 10px;
+  
 }
 
-.event-location {
+.eventid-location {
   text-align: center;
   margin-top: 10px;
   font-size: 18px;
 }
 
-.register-button {
+.registerid-button {
   display: block;
   margin: 20px auto;
   padding: 12px 20px;
@@ -64,7 +82,7 @@
   font-weight: bold;
 }
 
-.upcoming-events {
+.upcomingid-events {
   text-align: center;
   font-size: 16px;
   margin-top: 10px;
@@ -75,19 +93,19 @@
   font-size: 14px;
 }
 
-.event-description {
+.eventid-description {
   margin-top: 20px;
   padding: 0 20px;
   font-size: 16px;
 }
 
-.event-organizers {
+.eventid-organizers {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
 }
 
-/* Organizer Card */
+
 .organizer-card {
   padding: 15px;
   width: 100%;
@@ -97,52 +115,143 @@
   box-sizing: border-box;
 }
 
-.Img1 {
+/* .Img1 {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black 80%),
-    url("C:\Users\Phanindra Nelavalli\Desktop\ecell\src\assets\images\Phanindra.jpg");
+    url("C:\Users\prasa\OneDrive\Desktop\newecell\ECELL-WEB\src\assets\images\Phanindra.jpg");
   background-size: cover;
   background-position: center;
 }
 
 .Img2 {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black 80%),
-    url("C:\Users\Phanindra Nelavalli\Desktop\ecell\src\assets\images\Bhupathi.jpg");
+    url("C:\Users\prasa\OneDrive\Desktop\newecell\ECELL-WEB\src\assets\images\Bhupathi.jpg");
   background-size: cover;
   background-position: center;
-}
+} */
 
-/* Organizer Info */
+
 .organizer-info {
   font-size: 14px;
   text-align: left;
   padding-top: 190px;
-  /* Center text inside the card */
+ 
 }
 
-/* Organizer Image */
+
 .simg {
   width: 125px;
   height: 125px;
   display: block;
-  margin: 10px auto; /* Centers image inside the card */
+  margin: 10px auto; 
 }
 
-/* Role Title */
 .role {
   font-size: 17px;
   margin-bottom: 8px;
 }
 
-/* Members Container */
 .members {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* Space between .role and card */
+  gap: 8px; 
   margin-bottom: 15px;
 }
 
-/* Spacing between <p> tags inside organizer-info */
 .organizer-info p {
   margin: 2px 0;
+}
+
+
+
+
+@media (max-width: 768px) {
+  /* Smaller tablets and larger phones */
+  .eventid-container {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .eventid-left, .eventid-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .prizesid {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  .eventid-image {
+    width: 125px;
+    height: 125px;
+  }
+
+  .eventid-name {
+    font-size: 20px;
+    margin-top: 8px;
+  }
+
+  .eventid-location,
+  .upcomingid-events {
+    font-size: 16px;
+  }
+
+  .registerid-button {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
+
+  .organizer-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile devices */
+  .eventid-container {
+    padding: 5px;
+  }
+
+  .prizesid {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .eventid-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .eventid-name {
+    font-size: 18px;
+  }
+
+  .eventid-location,
+  .upcomingid-events,
+  .role {
+    font-size: 14px;
+  }
+
+  .registerid-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .organizer-info {
+    padding-top: 150px;
+    font-size: 12px;
+  }
+
+  .simg {
+    width: 100px;
+    height: 100px;
+  }
+
+  .organizer-card {
+    padding: 10px;
+    font-size: 12px;
+  }
 }
