@@ -144,7 +144,7 @@ const RegistrationForm = () => {
         eventId
       );
 
-      navigate("/reg2", { state: { eventId: eventId } });
+      navigate("/reg", { state: { eventId: eventId } });
     } catch (error) {
       console.error("Error saving form fields:", error);
     } finally {

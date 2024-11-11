@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
+import logo from './../assets/images/white_logo.png';
 
 function Navigator() {
   // State to handle the menu toggle for mobile
@@ -14,6 +15,7 @@ function Navigator() {
   return (
     <header>
       <div className="logo">
+        <img className="logo-image" src={logo} alt=""/>
         <h1>E-CELL</h1>
       </div>
       {/* Toggle button for mobile menu */}
@@ -44,14 +46,14 @@ function Navigator() {
           to="/schemes"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          Schemes
+          About Team
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/login"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           Login
-        </NavLink>
+        </NavLink> */}
       </nav>
     </header>
   );

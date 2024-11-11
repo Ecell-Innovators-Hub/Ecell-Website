@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav"; // Import your Navigator
 import Home from "./screens/Home"; // Your Home component
 import Events from "./screens/Events"; // Your Events component
+import Event from "./screens/Event";
 import NewEvent from "./screens/NewEvent";
 import RegistrationForm from "./screens/RegistrationForm";
 import Registrations from "./screens/Registrations";
@@ -20,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/event" element={<Event />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/regform" element={<RegistrationForm />} />
           <Route path="/reg" element={<Registrations />} />
