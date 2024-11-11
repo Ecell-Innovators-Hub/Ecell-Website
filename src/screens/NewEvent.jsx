@@ -107,6 +107,8 @@ const NewEvent = () => {
         description: eventDescription,
         date: eventDate,
         time: eventTime,
+        regDate,
+        regTime,
         location,
         firstPrize,
         secondPrize,
@@ -137,6 +139,8 @@ const NewEvent = () => {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
+  const [regDate, setRegDate] = useState("");
+  const [regTime, setRegTime] = useState("");
   const [eventDescription, setEventDescription] = useState("");
 
   return (
@@ -255,6 +259,27 @@ const NewEvent = () => {
             {/* Add more options as needed */}
           </select>
 
+          <div className="date-time">
+            <div>
+              <label>Registration Date</label>
+              <input
+                type="date"
+                required
+                value={regDate}
+                onChange={(e) => setRegDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Registration Time</label>
+              <input
+                type="time"
+                required
+                value={regTime}
+                onChange={(e) => setRegTime(e.target.value)}
+              />
+            </div>
+          </div>
+
           <label>1st Prize</label>
           <input
             type="text"
@@ -295,7 +320,7 @@ const NewEvent = () => {
 
           <div className="date-time">
             <div>
-              <label>Date</label>
+              <label>Event Date</label>
               <input
                 type="date"
                 required
@@ -304,7 +329,7 @@ const NewEvent = () => {
               />
             </div>
             <div>
-              <label>Time</label>
+              <label>Event Time</label>
               <input
                 type="time"
                 required
@@ -429,7 +454,7 @@ const NewEvent = () => {
         </div>
       </div>
 
-      <button type="submit" className="add-event-button">
+      <button type="submit" className="submit-button">
         Add Event
       </button>
     </form>
