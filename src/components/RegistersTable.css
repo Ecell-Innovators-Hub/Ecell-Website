@@ -1,0 +1,169 @@
+/* Container */
+.registrations-table-container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 40px;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.7), rgba(50, 50, 50, 0.7)); /* Dark gradient background */
+  color: #f5f5f5; /* Soft white text color */
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.registrations-table-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(60, 60, 60, 0.8));
+}
+
+/* Title */
+.registrations-table-container h2 {
+  text-align: center;
+  color: #ffce00;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+/* Export Button */
+.export-button {
+  background-color: #ffce00;
+  color: #000;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.export-button:hover {
+  background-color: #f4a200;
+}
+
+/* Table */
+.registrations-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.registrations-table th,
+.registrations-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.registrations-table th {
+  background-color: #ffce00;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.registrations-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.registrations-table tr:hover {
+  background-color: #333;
+  cursor: pointer;
+}
+
+/* Team Member Details Styling */
+.toggle-member-details {
+  background: #ffce00;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-top: 5px;
+}
+
+.toggle-member-details:hover {
+  background-color: #f4a200;
+  transform: translateY(-2px);
+}
+
+/* Dropdown container */
+.member-details-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 0 15px;
+  margin-top: 10px;
+}
+
+/* Active state for dropdown */
+.member-details-dropdown.active {
+  max-height: 500px; /* Adjust as needed based on content */
+  padding: 10px 15px;
+}
+
+/* Member Details List */
+.member-details-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.member-details-list li {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #f5f5f5;
+  display: flex;
+  align-items: center;
+}
+
+.member-details-list li strong {
+  color: #ffce00;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.member-details-list li span {
+  color: #f5f5f5;
+}
+
+/* Nested Details */
+.member-details-list li .sub-details {
+  font-size: 13px;
+  color: #ddd;
+  margin-top: 5px;
+  margin-left: 20px;
+  border-left: 2px solid #ffce00;
+  padding-left: 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .registrations-table-container {
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .registrations-table-container h2 {
+    font-size: 22px;
+  }
+
+  .registrations-table th,
+  .registrations-table td {
+    padding: 10px;
+  }
+
+  .registrations-table td ul li {
+    font-size: 12px;
+  }
+}

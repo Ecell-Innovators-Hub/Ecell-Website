@@ -1,132 +1,203 @@
+/* General Form Styling */
 .register-event-form {
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
-  color: #ffd700; /* Gold text color for contrast */
-  padding: 30px;
-  width: 90%; /* Full width to match form in image */
-  max-width: 1200px; /* Limit width on larger screens */
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.7),
+    rgba(50, 50, 50, 0.7)
+  ); /* Elegant dark gradient background */
+  color: #f5f5f5; /* Soft white text color */
+  padding: 40px;
+  max-width: 900px;
   margin: auto;
-  font-family: 'Arial', sans-serif;
-  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
   border-radius: 15px; /* Softer rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Softer shadow */
-  backdrop-filter: blur(60px); /* Glass blur effect */
-  -webkit-backdrop-filter: blur(60px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for glass effect */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); /* Enhanced shadow for depth */
+  backdrop-filter: blur(15px); /* Subtle glass blur */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin frosted border */
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
+.register-event-form:hover {
+  transform: translateY(-10px); /* Lift effect */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7); /* Stronger hover shadow */
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.8),
+    rgba(60, 60, 60, 0.8)
+  ); /* Slightly darker on hover */
+}
 
+/* Form Header */
 .form-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  position: relative;
 }
 
 .form-header h1 {
-  font-size: 24px; /* Larger font size for the heading */
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 700;
   text-transform: uppercase;
+  color: #ffce00;
+  letter-spacing: 2px;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #ffd700;
-  font-size: 18px;
+  color: #ffce00;
+  font-size: 22px;
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
+  transition: color 0.3s ease;
 }
 
+.close-button:hover {
+  color: #ffc107; /* Warmer gold */
+}
+
+/* Form Groups */
 .form-group {
   margin-bottom: 20px;
 }
 
 .form-group label {
-  font-weight: bold;
-  color: #ffd700;
+  font-weight: 600;
+  color: #ffce00;
   display: block;
   margin-bottom: 8px;
-  font-size: 16px; /* Slightly larger label text */
+  font-size: 19px;
 }
 
 input[type="text"],
+input[type="email"],
+input[type="number"],
 input[type="date"],
 input[type="time"],
-input[type="file"],
+textarea,
 select {
   width: 100%;
-  padding: 12px;
-  background-color: #333; /* Dark grey input background */
-  color: #fff; /* White text in input */
-  border: 1px solid #444; /* Border slightly lighter than background */
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 14px;
+  background-color: rgba(255, 255, 255, 0.1); /* Light transparent input */
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 16px;
   box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #ffce00;
+  box-shadow: 0 0 8px rgba(255, 206, 0, 0.8); /* Subtle glow */
+  outline: none;
+}
+
+/* Checkboxes and Radio Buttons */
 input[type="radio"],
 input[type="checkbox"] {
-  accent-color: #ffd700; /* Gold accent for checkboxes and radios */
-}
-
-textarea {
-  width: 100%;
-  padding: 12px;
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box;
+  accent-color: #ffce00;
+  margin-right: 8px;
 }
 
 .checkbox-option,
 .radio-option {
   display: flex;
   align-items: center;
+  gap: 8px;
   margin-bottom: 10px;
-  color: #ffd700; /* Gold text for options */
+  color: #fff; /* Set options text color to white */
+  font-size: 14px;
 }
 
+.checkbox-option:hover label,
+.radio-option:hover label {
+  color: #ffce00; /* Gold hover for labels */
+}
+
+/* Submit Button */
 .submit-button {
   width: 100%;
-  padding: 12px;
-  background-color: #ffd700; /* Gold background for button */
-  color: #000; /* Black text on button */
-  font-weight: bold;
+  padding: 16px;
+  background: linear-gradient(90deg, #ffce00, #ff9800); /* Modern gradient */
+  color: #000;
+  font-weight: 700;
   border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 18px; /* Larger font for button */
+  border-radius: 12px;
+  font-size: 18px;
   text-transform: uppercase;
-  transition: background-color 0.3s;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 .submit-button:hover {
-  background-color: #e0a800; /* Darker gold on hover */
+  background: linear-gradient(90deg, #ff9800, #ffce00); /* Reverse gradient */
+  transform: translateY(-3px); /* Subtle lift */
+  box-shadow: 0 8px 20px rgba(255, 152, 0, 0.5); /* Orange glow */
 }
 
-.form-group .select-box,
-.form-group .input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.add-person-button {
-  background-color: #ffd700;
-  color: #000;
-  padding: 10px;
-  font-size: 14px;
+/* Team Member Section */
+.team-config-container h3 {
+  font-size: 22px;
   font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  color: #ffce00;
+  margin-bottom: 15px;
+  text-align: center;
   text-transform: uppercase;
 }
 
-.add-person-button:hover {
-  background-color: #ffa500;
+.team-member-container {
+  background-color: rgba(255, 255, 255, 0.1); /* Soft frosted background */
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+.team-member-container h4 {
+  font-size: 18px;
+  color: #ffce00;
+  margin-bottom: 10px;
+}
+
+.team-member-container .form-group label {
+  font-size: 14px; /* Slightly smaller font for member details */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .register-event-form {
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .form-header h1 {
+    font-size: 26px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .team-member-container h4 {
+    font-size: 16px;
+  }
 }

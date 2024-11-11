@@ -242,6 +242,7 @@ const NewEvent = () => {
           <select
             required
             value={department}
+            style={{backgroundColor:"#333"}}
             onChange={(e) => setDepartment(e.target.value)}
           >
             <option value="" disabled>

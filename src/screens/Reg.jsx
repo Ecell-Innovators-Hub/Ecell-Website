@@ -3,6 +3,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import "./Registrations.css";
 import { db } from "../firebase";
 import { useLocation } from "react-router-dom";
+import Loader from "../components/Loader";
+
 
 const Registrations = () => {
   const location = useLocation();
@@ -12,7 +14,7 @@ const Registrations = () => {
   const [teamSize, setTeamSize] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchEventData = async () => {
       try {
@@ -41,7 +43,9 @@ const Registrations = () => {
 
     // Check if size is a valid number and within the allowed range
     if (isNaN(size) || size < 0 || size > (teamConfig?.teamSize || Infinity)) {
-      setErrorMessage(`Team size must be a number between 0 and ${teamConfig?.teamSize || 0}`);
+      setErrorMessage(
+        `Team size must be a number between 0 and ${teamConfig?.teamSize || 0}`
+      );
       return;
     }
 
@@ -100,18 +104,23 @@ const Registrations = () => {
       );
 
       await setDoc(registrationsRef, submittedData);
-      console.log("Registration successful:", submittedData);
+      console.log("Registration successful:", eventId, submittedData);
     } catch (error) {
       console.error("Error saving registration:", error);
     }
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   // Ensure teamSize is a valid number
-  const validTeamSize = Number.isInteger(teamSize) && teamSize >= 0 && teamSize <= (teamConfig?.teamSize || Infinity) ? teamSize : 0;
+  const validTeamSize =
+    Number.isInteger(teamSize) &&
+    teamSize >= 0 &&
+    teamSize <= (teamConfig?.teamSize || Infinity)
+      ? teamSize
+      : 0;
 
   return (
     <form className="register-event-form" onSubmit={handleSubmit}>
@@ -141,7 +150,7 @@ const Registrations = () => {
                 <label
                   key={idx}
                   className="checkbox-option"
-                  style={{ color: "#fff", fontSize: "16px" }} // Inline CSS for white color and 16px font size
+                  style={{ color: "#fff", fontSize: "14.9px" }} // Inline CSS for white color and 14.9px font size
                 >
                   <input
                     type="checkbox"
@@ -158,7 +167,7 @@ const Registrations = () => {
                 <label
                   key={idx}
                   className="radio-option"
-                  style={{ color: "#fff", fontSize: "16px" }} // Inline CSS for white color and 16px font size
+                  style={{ color: "#fff", fontSize: "14.9px" }} // Inline CSS for white color and 14.9px font size
                 >
                   <input
                     type="radio"
@@ -204,14 +213,16 @@ const Registrations = () => {
           </div>
 
           {/* Render team members only if teamSize is valid */}
-          {validTeamSize > 0 && validTeamSize <= (teamConfig?.teamSize || Infinity) && (
+          {validTeamSize > 0 &&
+            validTeamSize <= (teamConfig?.teamSize || Infinity) &&
             [...Array(validTeamSize)].map((_, teamIndex) => (
               <div key={teamIndex} className="team-member-container">
                 <h4>Member {teamIndex + 1}</h4>
                 {teamConfig.memberDetails.map((detail, detailIndex) => (
                   <div key={detailIndex} className="form-group">
-                    <label>
+                    <label style={{ fontSize: 18 }}>
                       {detail.label}
+
                       {detail.required && <span>*</span>}
                     </label>
                     {detail.type === "text" || detail.type === "email" ? (
@@ -226,7 +237,7 @@ const Registrations = () => {
                         {detail.options.map((option, idx) => (
                           <label
                             key={idx}
-                            style={{ color: "#fff", fontSize: "16px" }} // Inline CSS for white color and 16px font size
+                            style={{ color: "#fff", fontSize: "14.9px" }} // Inline CSS for white color and 14.9px font size
                             className="checkbox-option"
                           >
                             <input
@@ -243,7 +254,7 @@ const Registrations = () => {
                         {detail.options.map((option, idx) => (
                           <label
                             key={idx}
-                            style={{ color: "#fff", fontSize: "16px" }} // Inline CSS for white color and 16px font size
+                            style={{ color: "#fff", fontSize: "14.9px" }} // Inline CSS for white color and 14.9px font size
                             className="radio-option"
                           >
                             <input
@@ -260,8 +271,7 @@ const Registrations = () => {
                   </div>
                 ))}
               </div>
-            ))
-          )}
+            ))}
         </div>
       )}
 
@@ -269,6 +279,7 @@ const Registrations = () => {
         Submit
       </button>
     </form>
+    
   );
 };
 

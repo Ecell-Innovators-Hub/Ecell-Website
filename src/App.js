@@ -7,6 +7,8 @@ import Events from "./screens/Events"; // Your Events component
 import NewEvent from "./screens/NewEvent";
 import RegistrationForm from "./screens/RegistrationForm";
 import Registrations from "./screens/Registrations";
+import Dashboard from "./screens/Dashboard";
+import Reg from "./screens/Reg";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/regform" element={<RegistrationForm />} />
           <Route path="/reg" element={<Registrations />} />
+          <Route path="/reg2" element={<Reg />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>{" "}
         {/* Corrected closing tag */}
       </div>
