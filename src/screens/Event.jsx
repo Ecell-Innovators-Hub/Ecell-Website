@@ -52,7 +52,7 @@ function Event() {
             <br /> Bhimavaram, Andhra Pradesh 523155
           </p>
           <button className="registerid-button">Register</button>
-          <p className="upcomingid-events">Upcoming Events</p>
+          {/* <p className="upcomingid-events">Upcoming Events</p> */}
           <div className="prizesid">
             <h4>Prizes</h4>
             <span role="img" aria-label="first place medal">
