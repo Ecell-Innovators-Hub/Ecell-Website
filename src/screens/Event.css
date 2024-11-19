@@ -213,6 +213,12 @@
     width: 90%;
     margin: 10px auto;
   }
+
+  .organizer-info {
+    font-size:12px;
+    text-align: left;
+    padding-top: 190px;
+  }  
 }
 
 @media (max-width: 480px) {
@@ -260,4 +266,9 @@
     padding: 10px;
     font-size: 12px;
   }
+  .organizer-info {
+    font-size:12px;
+    text-align: left;
+    padding-top: 190px;
+  }  
 }
