@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NewEvent.css";
 import Cropper from "react-easy-crop";
 import addLogo from "./../assets/images/Add_image.png";
 import { db, storage } from "../firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NewEvent = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const eventId = location.state?.eventId || null;
+
   const [persons, setPersons] = useState([
     {
       personType: "student",
@@ -26,6 +29,63 @@ const NewEvent = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
+
+  const [locationField, setLocationField] = useState("");
+  const [department, setDepartment] = useState("");
+  const [firstPrize, setFirstPrize] = useState("");
+  const [secondPrize, setSecondPrize] = useState("");
+  const [thirdPrize, setThirdPrize] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const [regDate, setRegDate] = useState("");
+  const [regTime, setRegTime] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+
+  useEffect(() => {
+    const fetchEventDetails = async () => {
+      if (eventId) {
+        try {
+          const eventDocRef = doc(db, "events", eventId);
+          const eventDoc = await getDoc(eventDocRef);
+
+          if (eventDoc.exists()) {
+            const eventData = eventDoc.data();
+            setEventName(eventData.eventName || "");
+            setDepartment(eventData.department || "");
+            setEventDescription(eventData.description || "");
+            setEventDate(eventData.date || "");
+            setEventTime(eventData.time || "");
+            setRegDate(eventData.regDate || "");
+            setRegTime(eventData.regTime || "");
+            setLocationField(eventData.location || "");
+            setFirstPrize(eventData.firstPrize || "");
+            setSecondPrize(eventData.secondPrize || "");
+            setThirdPrize(eventData.thirdPrize || "");
+            setMainImage(eventData.mainImage || ""); // Reset for editing
+            if (eventData.mainImage) {
+              setImagePreview(eventData.mainImage.url);
+            }
+            setPersons(eventData.coordinators || [
+              {
+                personType: "student",
+                role: "",
+                name: "",
+                phone: "",
+                email: "",
+                department: "",
+                image: null,
+              },
+            ]);
+          }
+        } catch (error) {
+          console.error("Error fetching event details:", error);
+        }
+      }
+    };
+
+    fetchEventDetails();
+  }, [eventId]);
 
   const handleAddPerson = () => {
     if (persons.length < 2) {
@@ -54,10 +114,13 @@ const NewEvent = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
-
-      // Update the main image file
       setMainImage(file);
     }
+  };
+
+  const handleRemovePerson = (index) => {
+    const updatedPersons = persons.filter((_, i) => i !== index);
+    setPersons(updatedPersons);
   };
 
   const handlePersonChange = (index, field, value) => {
@@ -66,15 +129,18 @@ const NewEvent = () => {
     );
     setPersons(updatedPersons);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Upload main image
-      const mainImageRef = ref(storage, `events/${mainImage.name}`);
-      await uploadBytes(mainImageRef, mainImage);
-      const mainImageUrl = await getDownloadURL(mainImageRef);
+      let mainImageUrl = imagePreview;
 
-      // Prepare coordinators data with image URLs
+      if (mainImage) {
+        const mainImageRef = ref(storage, `events/${mainImage.name}`);
+        await uploadBytes(mainImageRef, mainImage);
+        mainImageUrl = await getDownloadURL(mainImageRef);
+      }
+
       const coordinators = await Promise.all(
         persons.map(async (person) => {
           if (person.image) {
@@ -98,50 +164,44 @@ const NewEvent = () => {
         })
       );
 
-      // Add event data with coordinators to Firestore
-      const eventDocRef = doc(collection(db, "events"));
-      await setDoc(eventDocRef, {
-        docid: eventDocRef.id,
+      const eventData = {
         eventName,
         department,
         description: eventDescription,
         date: eventDate,
         time: eventTime,
-        location,
+        regDate,
+        regTime,
+        location: locationField,
         firstPrize,
         secondPrize,
         thirdPrize,
         mainImage: {
           url: mainImageUrl,
-          name: mainImage.name,
-          type: mainImage.type,
-          size: mainImage.size,
         },
         coordinators,
-      });
+      };
 
-      console.log("Event and coordinators saved successfully!");
+      if (eventId) {
+        const eventDocRef = doc(db, "events", eventId);
+        await updateDoc(eventDocRef, eventData);
+        console.log("Event updated successfully!");
+      } else {
+        const eventDocRef = doc(collection(db, "events"));
+        await setDoc(eventDocRef, { ...eventData, docid: eventDocRef.id });
+        console.log("Event created successfully!");
+      }
 
-      // Navigate to /regform with the event document ID
-      navigate("/regform", { state: { eventId: eventDocRef.id } });
+      navigate("/regform", { state: { eventId: eventId || null } });
     } catch (error) {
       console.error("Error saving event:", error);
     }
   };
 
-  const [location, setLocation] = useState("");
-  const [department, setDepartment] = useState("");
-  const [firstPrize, setFirstPrize] = useState("");
-  const [secondPrize, setSecondPrize] = useState("");
-  const [thirdPrize, setThirdPrize] = useState("");
-  const [eventName, setEventName] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventTime, setEventTime] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-
   return (
     <form className="new-event-container" onSubmit={handleSubmit}>
-      <h1 className="title">Create New Event</h1>
+      <h1 className="title">{eventId ? "Edit Event" : "Create New Event"}</h1>
+      
 
       <div className="form-section">
         <div className="left-column">
@@ -234,14 +294,15 @@ const NewEvent = () => {
             type="text"
             placeholder="Location"
             required
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={locationField}
+            onChange={(e) => setLocationField(e.target.value)}
           />
 
           <label>Department</label>
           <select
             required
             value={department}
+            style={{ backgroundColor: "#333" }}
             onChange={(e) => setDepartment(e.target.value)}
           >
             <option value="" disabled>
@@ -253,6 +314,27 @@ const NewEvent = () => {
             <option value="IT">IT</option>
             {/* Add more options as needed */}
           </select>
+
+          <div className="date-time">
+            <div>
+              <label>Registration Date</label>
+              <input
+                type="date"
+                required
+                value={regDate}
+                onChange={(e) => setRegDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Registration Time</label>
+              <input
+                type="time"
+                required
+                value={regTime}
+                onChange={(e) => setRegTime(e.target.value)}
+              />
+            </div>
+          </div>
 
           <label>1st Prize</label>
           <input
@@ -294,7 +376,7 @@ const NewEvent = () => {
 
           <div className="date-time">
             <div>
-              <label>Date</label>
+              <label>Event Date</label>
               <input
                 type="date"
                 required
@@ -303,7 +385,7 @@ const NewEvent = () => {
               />
             </div>
             <div>
-              <label>Time</label>
+              <label>Event Time</label>
               <input
                 type="time"
                 required
@@ -416,6 +498,13 @@ const NewEvent = () => {
                   handlePersonChange(index, "department", e.target.value)
                 }
               />
+              <button
+                type="button"
+                onClick={() => handleRemovePerson(index)}
+                className="add-person"
+              >
+                Remove Person
+              </button>
             </div>
           ))}
           <button
@@ -428,9 +517,10 @@ const NewEvent = () => {
         </div>
       </div>
 
-      <button type="submit" className="add-event-button">
+      <button type="submit" className="submit-button">
         Add Event
       </button>
+    
     </form>
   );
 };

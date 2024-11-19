@@ -1,0 +1,249 @@
+/* Container */
+.registrations-table-container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 40px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.8),
+    rgba(50, 50, 50, 0.8)
+  );
+  color: #f5f5f5;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.registrations-table-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.9),
+    rgba(60, 60, 60, 0.9)
+  );
+}
+
+/* Title */
+.registrations-table-container h2 {
+  text-align: center;
+  color: #ffce00;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+/* Export Button */
+.export-button {
+  background-color: #ffce00;
+  color: #000;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.export-button:hover {
+  background-color: #f4a200;
+}
+
+/* Table Scroll Container */
+.table-scroll-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Table */
+.registrations-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.registrations-table th,
+.registrations-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.registrations-table th {
+  background-color: #ffce00;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.registrations-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.registrations-table tr:hover {
+  background-color: rgba(51, 51, 51, 0.7);
+  cursor: pointer;
+}
+
+.registrations-table td ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+/* Team Member Details Styling */
+.toggle-member-details {
+  background: #ffce00;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-top: 5px;
+}
+
+.toggle-member-details:hover {
+  background-color: #f4a200;
+  transform: translateY(-2px);
+}
+
+/* Dropdown container */
+.member-details-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 0 15px;
+  margin-top: 10px;
+}
+
+/* Active state for dropdown */
+.member-details-dropdown.active {
+  max-height: 500px;
+  padding: 10px 15px;
+}
+
+/* Member Details List */
+.member-details-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.member-details-list li {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #f5f5f5;
+  display: flex;
+  align-items: center;
+}
+
+.member-details-list li strong {
+  color: #ffce00;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.member-details-list li span {
+  color: #f5f5f5;
+}
+
+/* Nested Details */
+.member-details-list li .sub-details {
+  font-size: 13px;
+  color: #ddd;
+  margin-top: 5px;
+  margin-left: 20px;
+  border-left: 2px solid #ffce00;
+  padding-left: 10px;
+}
+
+/* Scrollbar Styling */
+.table-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb {
+  background: #ffce00;
+  border-radius: 4px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #f4a200;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .registrations-table-container {
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .registrations-table-container h2 {
+    font-size: 22px;
+  }
+
+  .registrations-table th,
+  .registrations-table td {
+    padding: 10px;
+  }
+
+  .registrations-table td ul li {
+    font-size: 12px;
+  }
+
+  .toggle-member-details {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* Criteria Button */
+.add-criteria-button {
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.add-criteria-button:hover {
+  background-color: #45a049;
+}
+
+/* Marks Input */
+.marks-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.marks-input:focus {
+  border-color: #ffce00;
+  outline: none;
+  background-color: #fff;
+}
+
+/* Total Marks Column */

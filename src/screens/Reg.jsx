@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import "./Registrations.css";
 import { db } from "../firebase";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
 
-const Registrations = ({ isLoggedIn }) => {
+
+const Registrations = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const eventId = location.state?.eventId;
   const [formFields, setFormFields] = useState([]);
   const [teamConfig, setTeamConfig] = useState(null);
   const [teamSize, setTeamSize] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchEventData = async () => {
       try {
@@ -37,14 +37,6 @@ const Registrations = ({ isLoggedIn }) => {
 
     fetchEventData();
   }, [eventId]);
-
-  const handleEdit = () => {
-    if (eventId) {
-      navigate("/regform", { state: { eventId: eventId } });
-    } else {
-      console.error("Event ID is not available.");
-    }
-  };
 
   const handleTeamSizeChange = (e) => {
     const size = parseInt(e.target.value, 10);
@@ -132,17 +124,8 @@ const Registrations = ({ isLoggedIn }) => {
 
   return (
     <form className="register-event-form" onSubmit={handleSubmit}>
-      <div className="events-header">
-        <h1 className="events-heading">Events</h1>
-        {isLoggedIn && (
-          <button
-            className="add-event"
-            style={{ width: "10%", fontSize: 16 }}
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
-        )}
+      <div className="form-header">
+        <h1>Register</h1>
       </div>
 
       {errorMessage && <p className="error">{errorMessage}</p>}
@@ -296,6 +279,7 @@ const Registrations = ({ isLoggedIn }) => {
         Submit
       </button>
     </form>
+    
   );
 };
 

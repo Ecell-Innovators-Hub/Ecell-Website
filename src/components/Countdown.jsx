@@ -2,28 +2,33 @@ import { useAnimate } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./Countdown.css";
 
-// const COUNTDOWN_FROM = "2024-12-01";
 
+// const COUNTDOWN_FROM = "2024-12-01";
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
 const ShiftingCountdown = ({ date, time }) => {
+
+  // Combine date and time into a single Date object
+  const targetDate = new Date(`${date}T${time}`);
+
   return (
     <div className="bg-gradient-to-br from-black to-black p-4">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-around">
-        <CountdownItem unit="Day" text="DAYS"  endDate={date} endTime={time} />
-        <CountdownItem unit="Hour" text="HOURS"  endDate={date} endTime={time} />
-        <CountdownItem unit="Minute" text="MINUTES"  endDate={date} endTime={time} />
-        <CountdownItem unit="Second" text="SECONDS"  endDate={date} endTime={time} />
+        <CountdownItem unit="Day" text="DAYS" targetDate={targetDate} />
+        <CountdownItem unit="Hour" text="HOURS" targetDate={targetDate} />
+        <CountdownItem unit="Minute" text="MINUTES" targetDate={targetDate} />
+        <CountdownItem unit="Second" text="SECONDS" targetDate={targetDate} />
+
       </div>
     </div>
   );
 };
 
-const CountdownItem = ({ unit, text, endDate, endTime }) => {
-  const { ref, time } = useTimer(unit, endDate, endTime);
+const CountdownItem = ({ unit, text, targetDate }) => {
+  const { ref, time } = useTimer(unit, targetDate);
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
@@ -45,14 +50,14 @@ const CountdownItem = ({ unit, text, endDate, endTime }) => {
 
 export default ShiftingCountdown;
 
-const useTimer = (unit, endDate, endTime) => {
+const useTimer = (unit, targetDate) => {
   const [ref, animate] = useAnimate();
   const intervalRef = useRef(null);
   const timeRef = useRef(0);
   const [time, setTime] = useState(0);
 
   const handleCountdown = useCallback(async () => {
-    const end = new Date(`${endDate}T${endTime}`);
+    const end = new Date(targetDate);
     const now = new Date();
     const distance = end - now;
 
@@ -84,7 +89,8 @@ const useTimer = (unit, endDate, endTime) => {
         { duration: 0.35 }
       );
     }
-  }, [animate, unit,endDate, endTime, ref]);
+  }, [animate, unit, ref, targetDate]);
+
 
   useEffect(() => {
     intervalRef.current = setInterval(handleCountdown, 1000);

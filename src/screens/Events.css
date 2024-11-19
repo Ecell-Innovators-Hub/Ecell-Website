@@ -2,87 +2,130 @@
 .event-list-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px; /* Space between the cards */
-  justify-content: center;
-  padding: 10px;
+  gap: 20px;
+  justify-content: space-evenly;
+  padding: 10px ;
   margin: 0 auto;
-  max-width: 1200px;
+  width: 100%;
   background-color: #000; /* Dark background for the container */
+}
+
+.events-header {
+  display: flex;
+  justify-content: space-between; /* Align heading and button */
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.events-heading {
+  font-size: 2rem;
+  color: #ffc23c; /* Golden accent */
+  font-weight: bold;
+  margin: 0;
+}
+
+.add-event {
+  background-color: #ffc23c;
+  color: #000;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-event:hover {
+  background-color: #e0a800; /* Darker hover effect */
+  transform: scale(1.05);
 }
 
 /* Individual event card */
 .event-card-box {
   display: flex;
+  margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
   background-color: #111; /* Dark background for each card */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
   overflow: hidden;
-  width: 350px; /* Allows two cards per row */
-  text-align: center;
+  width: 370px; /* Adjusted width for consistent alignment */
+  text-align: left; /* Align content to the left */
   color: #fff; /* White text color */
-  padding: 10px;
-  transition: transform 0.2s ease;
   border: 1px solid #444; /* Border to define card edges */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .event-card-box:hover {
   transform: translateY(-5px);
 }
 
+/* Event image container */
+.event-image-container {
+  width: 50%; /* Image container takes 50% of the card width */
+  display: flex; /* Flexbox to center the image */
+  justify-content: center; /* Horizontally center the image */
+  align-items: center; /* Vertically center the image */
+}
+
 /* Event image styling */
 .event-image {
-  width: 130px;
-  height: 130px;
+  width: 135px; /* Set a fixed size for the circular image */
+  height: 135px;
   object-fit: cover;
   border-radius: 50%; /* Makes the image circular */
+  
 }
 
 /* Details section inside the event card */
 .event-details {
-  padding: 0;
+  width: 55%; /* Details take the remaining 50% width */
+  padding: 30px 10px; /* Add some padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px; /* Spacing between elements */
 }
 
 .event-title {
-  font-size: 1.2em;
-  color: #fff;
-  margin-bottom: 10px;
+  font-size: 1.6em;
+  color: #ffc23c;
+  margin-bottom: 10px;/* Remove default margin for better alignment */
 }
 
 .event-organizer,
 .event-venue {
-  font-size: 0.9em;
+  font-size: 1em;
+  margin-bottom: 4px;
   color: #aaa;
-  font-weight: bold;
-  margin: 5px 0;
+  margin: 0; /* Align all text properly */
 }
 
-/* Register button on the event card */
 .register-button {
   display: inline-block;
-  /* background-color: #333;
-  color: #fff; */
   background-color: #ffc23c;
   color: #000;
   padding: 8px 20px;
-  margin-top: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  /* font-size: 0.9em; */
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.2s ease;
+  align-self: start; /* Align button to the start of the details section */
 }
 
 .register-button:hover {
   background-color: #555;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .event-card-box {
-    width: 100%; /* Full-width on smaller screens */
-  }
+.event-card-link,
+.event-organizer,
+.event-venue {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Maintain text color */
 }
+

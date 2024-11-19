@@ -189,6 +189,23 @@ textarea {
   background-color: #ffa500;
 }
 
+.submit-button {
+  padding: 10px 20px;
+  background-color: #ffd700; /* Yellow/orange */
+  color: #000; /* Black text */
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.submit-button:hover {
+  background-color: #ffa500; /* Darker orange on hover */
+}
+
 /* Global box-sizing */
 * {
   box-sizing: border-box;
