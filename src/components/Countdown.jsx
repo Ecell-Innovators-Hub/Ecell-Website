@@ -2,12 +2,15 @@ import { useAnimate } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./Countdown.css";
 
+
+// const COUNTDOWN_FROM = "2024-12-01";
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
 const ShiftingCountdown = ({ date, time }) => {
+
   // Combine date and time into a single Date object
   const targetDate = new Date(`${date}T${time}`);
 
@@ -18,6 +21,7 @@ const ShiftingCountdown = ({ date, time }) => {
         <CountdownItem unit="Hour" text="HOURS" targetDate={targetDate} />
         <CountdownItem unit="Minute" text="MINUTES" targetDate={targetDate} />
         <CountdownItem unit="Second" text="SECONDS" targetDate={targetDate} />
+
       </div>
     </div>
   );
@@ -55,7 +59,7 @@ const useTimer = (unit, targetDate) => {
   const handleCountdown = useCallback(async () => {
     const end = new Date(targetDate);
     const now = new Date();
-    const distance = +end - +now;
+    const distance = end - now;
 
     let newTime = 0;
 
@@ -87,9 +91,10 @@ const useTimer = (unit, targetDate) => {
     }
   }, [animate, unit, ref, targetDate]);
 
+
   useEffect(() => {
     intervalRef.current = setInterval(handleCountdown, 1000);
-    return () => clearInterval(intervalRef.current || undefined);
+    return () => clearInterval(intervalRef.current);
   }, [handleCountdown]);
 
   return { ref, time };

@@ -53,11 +53,9 @@
 
 .prizesid {
   text-align: center;
-  margin-top: 20px;
   font-size: 20px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 15px;
   border-radius: 10px;
 }
 
@@ -133,7 +131,6 @@
   text-align: center;
   box-sizing: border-box;
 }
-
 
 
 .organizer-info {
