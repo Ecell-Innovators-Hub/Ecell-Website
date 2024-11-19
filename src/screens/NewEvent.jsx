@@ -66,17 +66,19 @@ const NewEvent = () => {
             if (eventData.mainImage) {
               setImagePreview(eventData.mainImage.url);
             }
-            setPersons(eventData.coordinators || [
-              {
-                personType: "student",
-                role: "",
-                name: "",
-                phone: "",
-                email: "",
-                department: "",
-                image: null,
-              },
-            ]);
+            setPersons(
+              eventData.coordinators || [
+                {
+                  personType: "student",
+                  role: "",
+                  name: "",
+                  phone: "",
+                  email: "",
+                  department: "",
+                  image: null,
+                },
+              ]
+            );
           }
         } catch (error) {
           console.error("Error fetching event details:", error);
@@ -201,7 +203,6 @@ const NewEvent = () => {
   return (
     <form className="new-event-container" onSubmit={handleSubmit}>
       <h1 className="title">{eventId ? "Edit Event" : "Create New Event"}</h1>
-      
 
       <div className="form-section">
         <div className="left-column">
@@ -308,10 +309,15 @@ const NewEvent = () => {
             <option value="" disabled>
               Select Department
             </option>
-            <option value="HR">HR</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Finance">Finance</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
             <option value="IT">IT</option>
+            <option value="EEE">EEE</option>
+            <option value="AIML">AIML</option>
+            <option value="AI&DS">AI&DS</option>
+            <option value="CSBS">CSBS</option>
+            <option value="CE">CE</option>
+            <option value="ME">ME</option>
             {/* Add more options as needed */}
           </select>
 
@@ -520,7 +526,6 @@ const NewEvent = () => {
       <button type="submit" className="submit-button">
         Add Event
       </button>
-    
     </form>
   );
 };

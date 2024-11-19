@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./RegistrationForm.css";
 import { db } from "../firebase";
-import { setDoc, doc,getDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -13,52 +13,6 @@ const RegistrationForm = () => {
   const [questions, setQuestions] = useState([
     { question: "", type: "text", optionsCount: 0, options: [] },
   ]);
-
-  useEffect(() => {
-    const fetchEventDetails = async () => {
-      if (!eventId) {
-        setLoading(false);
-        return;
-      }
-  
-      try {
-        const eventDocRef = doc(db, "events", eventId);
-        const eventDoc = await getDoc(eventDocRef);
-  
-        if (eventDoc.exists()) {
-          const eventData = eventDoc.data();
-          setQuestions(
-            eventData.formFields?.map((field) => ({
-              question: field.label,
-              type: field.type || "text",
-              optionsCount: field.options?.length || 0,
-              options: field.options || [],
-            })) || []
-          );
-  
-          if (eventData.teamConfig) {
-            setTeamConfig({
-              isEnabled: true,
-              teamSize: eventData.teamConfig.teamSize || 1,
-              memberDetails:
-                eventData.teamConfig.memberDetails?.map((detail) => ({
-                  label: detail.label,
-                  type: detail.type || "text",
-                  options: detail.options || [],
-                })) || [],
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching event details:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchEventDetails();
-  }, [eventId]);
-  
 
   const [teamConfig, setTeamConfig] = useState({
     isEnabled: false,
