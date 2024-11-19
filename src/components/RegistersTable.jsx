@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import "./RegistersTable.css";
 import Loader from "../components/Loader";
 import * as XLSX from "xlsx";
+import { collection, getDoc, doc, getDocs } from "firebase/firestore";
 
 const RegistersTable = () => {
   const [registrations, setRegistrations] = useState([]);
   const [teamConfig, setTeamConfig] = useState(null);
   const [formFields, setFormFields] = useState([]);
+  const [marksCriteria, setMarksCriteria] = useState([]);
+  const [marks, setMarks] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [expandedMembers, setExpandedMembers] = useState({});
 
@@ -33,10 +35,12 @@ const RegistersTable = () => {
           "registrations"
         );
         const querySnapshot = await getDocs(registrationsRef);
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
+
+        let data = querySnapshot.docs.map((docSnapshot) => ({
+          id: docSnapshot.id,
+          ...docSnapshot.data(),
         }));
+
         setRegistrations(data);
       } catch (error) {
         console.error("Error fetching event or registration data:", error);
@@ -54,75 +58,72 @@ const RegistersTable = () => {
     }));
   };
 
+  const handleMarksChange = (teamId, criteriaIndex, value) => {
+    setMarks((prev) => ({
+      ...prev,
+      [teamId]: {
+        ...prev[teamId],
+        [criteriaIndex]: Number(value),
+      },
+    }));
+  };
+
+  const calculateTotalMarks = (teamId) => {
+    const teamMarks = marks[teamId] || {};
+    return Object.values(teamMarks).reduce((sum, mark) => sum + (mark || 0), 0);
+  };
+
+  const addCriteria = () => {
+    const criteriaName = prompt("Enter criteria name:");
+    if (!criteriaName) return;
+
+    const totalMarks = parseInt(
+      prompt("Enter total marks for this criteria:"),
+      10
+    );
+    if (isNaN(totalMarks) || totalMarks <= 0) {
+      alert("Please enter a valid number for total marks.");
+      return;
+    }
+
+    setMarksCriteria((prev) => [
+      ...prev,
+      { name: criteriaName, totalMarks },
+    ]);
+  };
+
   const exportToExcel = () => {
-    const worksheetData = registrations.map((registration) => {
-      const registrationRow = {};
+    const worksheetData = [];
 
-      // Loop through the form fields and add them to the row
-      formFields.forEach((field) => {
-        registrationRow[field.label] = Array.isArray(registration[field.label])
-          ? registration[field.label].join(", ")
-          : registration[field.label] || "N/A";
-      });
+    registrations.forEach((registration) => {
+      const teamMarks = marks[registration.teamData?.teamId] || {};
+      const row = {
+        "Team ID": registration.teamData?.teamId || "N/A",
+        ...Object.fromEntries(
+          formFields.map((field) => [
+            field.label,
+            Array.isArray(registration[field.label])
+              ? registration[field.label].join(", ")
+              : registration[field.label] || "N/A",
+          ])
+        ),
+        "Team Size": registration.teamData?.teamSize || "N/A",
+        ...Object.fromEntries(
+          marksCriteria.map((criteria, index) => [
+            criteria.name,
+            teamMarks[index] || "N/A",
+          ])
+        ),
+        "Total Marks": calculateTotalMarks(registration.teamData?.teamId),
+      };
 
-      // Add team size to the row
-      registrationRow["Team Size"] = registration.teamData?.teamSize || "N/A";
-
-      // If there are team members, combine their details into a single cell
-      if (registration.teamData?.members) {
-        const teamMembers = registration.teamData.members
-          .map(
-            (member) =>
-              teamConfig?.memberDetails.map(
-                (detail) => member[detail.label] + "," || "N/A"
-              )[0] // Fetch only the first value for each member
-          )
-          .join("\n"); // Join each member's data with a newline
-
-        registrationRow["Team Members"] = teamMembers || "N/A";
-      } else {
-        registrationRow["Team Members"] = "N/A";
-      }
-
-      return registrationRow;
+      worksheetData.push(row);
     });
 
-    // Create a worksheet from the registration data
     const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-
-    // Apply styling to the first row (header)
-    const headerStyle = {
-      font: { bold: true, color: { rgb: "FFFFFF" } },
-      fill: { fgColor: { rgb: "000000" } },
-      alignment: { horizontal: "center", vertical: "center" },
-    };
-
-    // Apply header styling and determine column widths
-    const columnWidths = [];
-    Object.keys(worksheet).forEach((cell) => {
-      const cellRef = XLSX.utils.decode_cell(cell);
-      if (cellRef.r === 0) {
-        // First row: Apply header styling
-        worksheet[cell].s = headerStyle;
-      }
-
-      // Calculate column widths based on the length of the content
-      const content = worksheet[cell]?.v || ""; // Get cell content
-      const length = content.toString().length;
-      columnWidths[cellRef.c] = Math.max(
-        columnWidths[cellRef.c] || 10,
-        length + 2
-      );
-    });
-
-    // Apply column widths
-    worksheet["!cols"] = columnWidths.map((width) => ({ width }));
-
-    // Create the workbook and append the worksheet
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
 
-    // Write the workbook to an Excel file
     XLSX.writeFile(workbook, "registrations.xlsx");
   };
 
@@ -133,22 +134,33 @@ const RegistersTable = () => {
   return (
     <div className="registrations-table-container">
       <h2>Registrations</h2>
+      <button onClick={addCriteria} className="add-criteria-button">
+        Add Criteria
+      </button>
       <button onClick={exportToExcel} className="export-button">
         Export to Excel
       </button>
       <table className="registrations-table">
         <thead>
           <tr>
+            <th>Team ID</th>
             {formFields.map((field, index) => (
               <th key={`field-${index}`}>{field.label}</th>
             ))}
             <th>Team Size</th>
+            {marksCriteria.map((criteria, index) => (
+              <th key={`criteria-${index}`}>
+                {criteria.name} ({criteria.totalMarks})
+              </th>
+            ))}
+            <th>Total Marks</th>
             <th>Members</th>
           </tr>
         </thead>
         <tbody>
           {registrations.map((registration) => (
             <tr key={registration.id}>
+              <td>{registration.teamData?.teamId || "N/A"}</td>
               {formFields.map((field, index) => (
                 <td key={`field-${index}`}>
                   {Array.isArray(registration[field.label])
@@ -157,6 +169,25 @@ const RegistersTable = () => {
                 </td>
               ))}
               <td>{registration.teamData?.teamSize || "N/A"}</td>
+              {marksCriteria.map((_, index) => (
+                <td key={`marks-${index}`}>
+                <input
+                  type="number"
+                  value={marks[registration.teamData?.teamId]?.[index] || ""}
+                  onChange={(e) =>
+                    handleMarksChange(
+                      registration.teamData?.teamId,
+                      index,
+                      e.target.value
+                    )
+                  }
+                  className="marks-input"
+                  max={marksCriteria[index]?.totalMarks || 100}  // Max value based on the total marks for this criterion
+                />
+              </td>
+              
+              ))}
+              <td>{calculateTotalMarks(registration.teamData?.teamId)}</td>
               <td>
                 {registration.teamData?.members ? (
                   <ul>

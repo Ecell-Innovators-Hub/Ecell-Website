@@ -7,7 +7,7 @@ import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Loader from "../components/Loader";
 
-function Event() {
+function Event({ isLoggedIn }) {
   const navigate = useNavigate();
   const location = useLocation();
   const eventId = location.state?.eventId; // Ensure it's coming from the location state
@@ -36,7 +36,7 @@ function Event() {
     } else {
       console.error("Event ID is missing.");
     }
-  }, [eventId]); // Add eventId as dependency to refetch data when eventId changes
+  }, [eventId]);
 
   const handleSubmit = () => {
     if (event?.id) {
@@ -46,7 +46,14 @@ function Event() {
     }
   };
 
-  // Check if registration date has passed
+  const handleEdit = () => {
+    if (event?.id) {
+      navigate("/newevent", { state: { eventId: event.id } });
+    } else {
+      console.error("Event ID is not available.");
+    }
+  };
+
   const hasRegistrationClosed = event?.regDate
     ? new Date() > new Date(event.regDate)
     : false;
@@ -56,7 +63,7 @@ function Event() {
   }
 
   return (
-    <div className="eventid-container">
+    <div key={event.id} className="eventid-container">
       <div className="eventid-left">
         <img
           src={event.mainImage ? event.mainImage.url : logo}
@@ -64,18 +71,27 @@ function Event() {
           className="eventid-image"
         />
         <h2 className="eventid-name">{event.eventName || "Event Name"}</h2>
-        <p className="eventid-location">
+        <div className="eventid-location">
           <p className="eventid-department" style={{ margin: "10px" }}>
             Department: {event.department}
           </p>
           <span role="img" aria-label="location">
             📍
           </span>
-          {event.location ? event.location.replace(/,/g, ",<br />") : ""}
-        </p>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: event.location
+                ? event.location.replace(/,/g, ",<br />")
+                : "",
+            }}
+          />
+        </div>
 
         {hasRegistrationClosed ? (
-          <p style={{ color: "red", fontWeight: "bold", fontSize: "21px" }} className="upcomingid-events">
+          <p
+            style={{ color: "red", fontWeight: "bold", fontSize: "21px" }}
+            className="upcomingid-events"
+          >
             Registrations Closed!
           </p>
         ) : (
@@ -84,8 +100,17 @@ function Event() {
           </button>
         )}
 
-        <p className="upcomingid-events" style={{ fontSize: 16, fontWeight: "bold" }}>
-          Registration Last Date :{" "}
+        {isLoggedIn && (
+          <button className="edit-button" onClick={handleEdit}>
+            Edit Event
+          </button>
+        )}
+
+        <p
+          className="upcomingid-events"
+          style={{ fontSize: 16, fontWeight: "bold" }}
+        >
+          Registration Last Date:{" "}
           {event.regDate
             ? event.regDate.split("-").reverse().join("/")
             : "Registration date not available"}

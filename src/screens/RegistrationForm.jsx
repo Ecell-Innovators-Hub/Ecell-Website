@@ -19,6 +19,11 @@ const RegistrationForm = () => {
     teamSize: 1,
     memberDetails: [{ label: "", type: "text", options: [] }],
   });
+  const handleRemoveQuestion = (index) => {
+    setQuestions((prevQuestions) =>
+      prevQuestions.filter((_, questionIndex) => questionIndex !== index)
+    );
+  };
 
   const [loading, setLoading] = useState(true); // Start with loading state as true
 
@@ -69,6 +74,15 @@ const RegistrationForm = () => {
     setTeamConfig((prev) => ({
       ...prev,
       memberDetails: updatedDetails,
+    }));
+  };
+
+  const handleRemoveTeamDetail = (index) => {
+    setTeamConfig((prev) => ({
+      ...prev,
+      memberDetails: prev.memberDetails.filter(
+        (_, detailIndex) => detailIndex !== index
+      ),
     }));
   };
 
@@ -242,6 +256,15 @@ const RegistrationForm = () => {
               </div>
             </div>
           )}
+
+          <button
+            type="button"
+            onClick={() => handleRemoveQuestion(questionIndex)} // Corrected here
+            className="add-question-button"
+            style={{ marginTop: 0, marginBottom: 9 }}
+          >
+            Remove Question
+          </button>
         </div>
       ))}
 
@@ -257,6 +280,7 @@ const RegistrationForm = () => {
         type="button"
         onClick={handleAddTeamConfig}
         className="add-question-button"
+        style={{ marginLeft: 10 }}
       >
         Team
       </button>
@@ -347,6 +371,14 @@ const RegistrationForm = () => {
                   </div>
                 </div>
               )}
+              <button
+                type="button"
+                onClick={() => handleRemoveTeamDetail(index)} // Corrected here
+                className="add-question-button"
+                style={{ marginTop: 0, marginBottom: 9 }}
+              >
+                Remove Detail
+              </button>
             </div>
           ))}
           <button
