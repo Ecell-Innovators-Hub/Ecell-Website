@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import "./RegistersTable.css";
-import Loader from "../components/Loader";
+import Loader from "./Loader";
 import * as XLSX from "xlsx";
 import {
   collection,
@@ -23,38 +23,13 @@ const RegistersTable = () => {
   const [showCriteriaPopup, setShowCriteriaPopup] = useState(false);
   const [newCriteria, setNewCriteria] = useState({ name: "", totalMarks: "" });
   const [errorMessage, setErrorMessage] = useState("");
-  const [events, setEvents] = useState([]); // For dropdown event list
-  const [selectedEventId, setSelectedEventId] = useState(null); // For selected event
-  
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const eventsSnapshot = await getDocs(collection(db, "events"));
-        const eventList = eventsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().eventName || "Unnamed Event",
-        }));
-        setEvents(eventList);
-
-        if (eventList.length > 0) {
-          setSelectedEventId(eventList[0].id); // Default to the first event
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
-    fetchEvents();
-  }, []);
+  const staticEventId = "VlBCwvE81aieFUhTJigP"; // Replace with your actual event ID
 
   useEffect(() => {
     const fetchEventDetails = async () => {
-      if (!selectedEventId) return;
-
-      setIsLoading(true);
       try {
-        const eventDocRef = doc(db, "events", selectedEventId);
+        const eventDocRef = doc(db, "events", staticEventId);
         const eventDoc = await getDoc(eventDocRef);
 
         if (eventDoc.exists()) {
@@ -67,7 +42,7 @@ const RegistersTable = () => {
         const registrationsRef = collection(
           db,
           "events",
-          selectedEventId,
+          staticEventId,
           "registrations"
         );
         const querySnapshot = await getDocs(registrationsRef);
@@ -76,35 +51,9 @@ const RegistersTable = () => {
         let submittedTeamsData = {};
         let fetchedMarks = {};
 
-        // Determine the highest existing team ID
-        let maxTeamId = 0;
-
-        querySnapshot.docs.map(async (docSnapshot) => {
+        querySnapshot.docs.forEach((docSnapshot) => {
           const regData = docSnapshot.data();
           const teamId = regData.teamData?.teamId;
-
-          if (teamId) {
-            maxTeamId = Math.max(maxTeamId, parseInt(teamId, 10));
-          } else {
-            // Assign a new team ID if it doesn't exist
-            maxTeamId += 1;
-            regData.teamData = {
-              ...regData.teamData,
-              teamId: maxTeamId.toString(),
-            };
-
-            // Update the document in Firebase
-            const teamDocRef = doc(
-              db,
-              "events",
-              selectedEventId,
-              "registrations",
-              docSnapshot.id
-            );
-            await updateDoc(teamDocRef, {
-              "teamData.teamId": maxTeamId.toString(),
-            });
-          }
 
           data.push({ id: docSnapshot.id, ...regData });
 
@@ -124,7 +73,7 @@ const RegistersTable = () => {
     };
 
     fetchEventDetails();
-  }, [selectedEventId]);
+  }, [staticEventId]);
 
   const toggleMemberDetails = (id) => {
     setExpandedMembers((prev) => ({
@@ -163,7 +112,7 @@ const RegistersTable = () => {
       const teamDocRef = doc(
         db,
         "events",
-        selectedEventId,
+        staticEventId,
         "registrations",
         registration.id
       );
@@ -187,6 +136,7 @@ const RegistersTable = () => {
     }
   };
 
+  // Fetch mark for a specific team and criterion from Firebase
   const getMarkFromFirebase = (teamId, criterionName) => {
     if (!marks[teamId]) return undefined; // Return undefined if no marks for team
     return marks[teamId][criterionName] || undefined; // Return specific criterion mark
@@ -225,18 +175,6 @@ const RegistersTable = () => {
     return Object.values(teamMarks).reduce((sum, mark) => sum + (mark || 0), 0);
   };
 
-  const getTopTeams = () => {
-    return [...registrations]
-      .map((registration) => ({
-        ...registration,
-        totalMarks: calculateTotalMarks(registration.teamData?.teamId),
-      }))
-      .sort((a, b) => b.totalMarks - a.totalMarks)
-      .slice(0, 3); // Top 3 teams
-  };
-
-  const topTeams = getTopTeams();
-
   const handleAddCriteria = async () => {
     if (!newCriteria.name.trim()) {
       alert("Criteria name is required.");
@@ -254,7 +192,7 @@ const RegistersTable = () => {
     ];
 
     try {
-      const eventDocRef = doc(db, "events", selectedEventId);
+      const eventDocRef = doc(db, "events", staticEventId);
       await updateDoc(eventDocRef, { marksCriteria: updatedCriteria });
       setMarksCriteria(updatedCriteria);
       setShowCriteriaPopup(false);
@@ -266,33 +204,85 @@ const RegistersTable = () => {
   };
 
   const exportToExcel = () => {
-    const combinedWorksheetData = registrations.map((registration) => {
+    const combinedWorksheetData = []; // Data for the combined Excel sheet
+    
+    registrations.forEach((registration) => {
       const teamId = registration.teamData?.teamId || "N/A";
       const teamName = registration.teamData?.teamName || "N/A";
       const teamSize = registration.teamData?.teamSize || "N/A";
-
+      
+      // Add marks criteria
       const marksData = {};
       marksCriteria.forEach((criteria) => {
         marksData[`${criteria.name} (${criteria.totalMarks})`] =
           registration.marks?.[criteria.name] || "N/A";
       });
-
       const totalMarks = calculateTotalMarks(teamId);
-
-      return {
-        "Team ID": teamId,
-        "Team Name": teamName,
-        "Team Size": teamSize,
-        ...marksData,
-        "Total Marks": totalMarks,
-      };
+  
+      // Add a single team row with placeholders if no members are present
+      if (!registration.teamData?.members?.length) {
+        combinedWorksheetData.push({
+          "Team ID": teamId,
+          "Team Name": teamName,
+          "Team Size": teamSize,
+          ...marksData,
+          "Total Marks": totalMarks,
+          "Member Name": "N/A",
+          "Member Details": "N/A",
+        });
+      }
+  
+      // Add a row for each team member
+      registration.teamData?.members?.forEach((member) => {
+        const memberData = {};
+        
+        // Add form fields to member rows
+        formFields.forEach((field) => {
+          memberData[field.label] = Array.isArray(registration[field.label])
+            ? registration[field.label].join(", ")
+            : registration[field.label] || "N/A";
+        });
+        
+        // Add member-specific details
+        teamConfig?.memberDetails.forEach((detail) => {
+          memberData[detail.label] = member[detail.label] || "N/A";
+        });
+  
+        // Combine team-level and member-level data
+        combinedWorksheetData.push({
+          "Team ID": teamId,
+          "Team Name": teamName,
+          "Team Size": teamSize,
+          ...marksData,
+          "Total Marks": totalMarks,
+          ...memberData,
+        });
+      });
     });
-
-    const worksheet = XLSX.utils.json_to_sheet(combinedWorksheetData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
-    XLSX.writeFile(workbook, `${selectedEventId}_registrations.xlsx`);
+  
+    // Function to create a worksheet and save to an Excel file
+    const saveToExcel = (data, sheetName, fileName) => {
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      
+      // Adjust column widths dynamically
+      const columnWidths = Object.keys(data[0] || {}).map((key) => ({
+        width: Math.max(15, key.length + 5), // Adjust based on header lengths
+      }));
+      worksheet["!cols"] = columnWidths;
+  
+      // Create the workbook and append the worksheet
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+  
+      // Write the workbook to an Excel file
+      XLSX.writeFile(workbook, fileName);
+    };
+  
+    // Save the reduced-redundancy data to a single sheet
+    saveToExcel(combinedWorksheetData, "Event Details", "event_details_combined.xlsx");
   };
+  
+  
 
   if (isLoading) {
     return <Loader />;
@@ -301,24 +291,6 @@ const RegistersTable = () => {
   return (
     <div className="registrations-table-container">
       <h2>Registrations</h2>
-
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          Select Event:
-          <select
-            style={{ backgroundColor: "#333" }}
-            value={selectedEventId || ""}
-            onChange={(e) => setSelectedEventId(e.target.value)}
-          >
-            {events.map((event) => (
-              <option key={event.id} value={event.id}>
-                {event.name}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
       <button
         onClick={() => setShowCriteriaPopup(true)}
         className="add-criteria-button"
@@ -328,11 +300,6 @@ const RegistersTable = () => {
       <button onClick={exportToExcel} className="export-button">
         Export to Excel
       </button>
-
-      <p>
-        <b>Total Teams : </b>
-        {registrations.length}
-      </p>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
@@ -351,6 +318,8 @@ const RegistersTable = () => {
                 }
               />
             </label>
+            <br />
+            <br />
             <label>
               Total Marks:
               <input
@@ -365,19 +334,16 @@ const RegistersTable = () => {
                 }
               />
             </label>
-            <div className="popup-buttons" style={{ marginTop: 10 }}>
-              <button
-                onClick={handleAddCriteria}
-                style={{ marginRight: 10 }}
-                className="export-button"
-              >
+            <div style={{ marginTop: 15 }}>
+              <button onClick={handleAddCriteria} className="export-button">
                 Add
               </button>
               <button
                 onClick={() => setShowCriteriaPopup(false)}
+                style={{ marginLeft: 10 }}
                 className="export-button"
               >
-                Cancel
+                &times;
               </button>
             </div>
           </div>
@@ -524,29 +490,6 @@ const RegistersTable = () => {
                     );
                   })()}
                 </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <h3>Top 3 Teams</h3>
-      <div style={{ overflowX: "auto" }}>
-        <table className="registrations-table">
-          <thead>
-            <tr>
-              <th>Team ID</th>
-              <th>Team Name</th>
-              <th>Team Size</th>
-              <th>Total Marks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topTeams.map((team) => (
-              <tr key={team.id}>
-                <td>{team.teamData?.teamId || "N/A"}</td>
-                <td>{team?.["Team Name"] || "N/A"}</td>
-                <td>{team.teamData?.teamSize || "N/A"}</td>
-                <td>{team.totalMarks}</td>
               </tr>
             ))}
           </tbody>
