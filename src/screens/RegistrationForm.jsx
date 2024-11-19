@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./RegistrationForm.css";
 import { db } from "../firebase";
-import { setDoc, doc,getDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -20,11 +20,11 @@ const RegistrationForm = () => {
         setLoading(false);
         return;
       }
-  
+
       try {
         const eventDocRef = doc(db, "events", eventId);
         const eventDoc = await getDoc(eventDocRef);
-  
+
         if (eventDoc.exists()) {
           const eventData = eventDoc.data();
           setQuestions(
@@ -35,7 +35,7 @@ const RegistrationForm = () => {
               options: field.options || [],
             })) || []
           );
-  
+
           if (eventData.teamConfig) {
             setTeamConfig({
               isEnabled: true,
@@ -55,10 +55,9 @@ const RegistrationForm = () => {
         setLoading(false);
       }
     };
-  
+
     fetchEventDetails();
   }, [eventId]);
-  
 
   const [teamConfig, setTeamConfig] = useState({
     isEnabled: false,
@@ -242,6 +241,7 @@ const RegistrationForm = () => {
             <div className="input-group type-field">
               <label>Type</label>
               <select
+                style={{ backgroundColor: "#222" }}
                 value={q.type}
                 onChange={(e) =>
                   handleTypeChange(questionIndex, e.target.value)
@@ -260,6 +260,7 @@ const RegistrationForm = () => {
               <div className="container">
                 <label>No. of Options:</label>
                 <select
+                  style={{ backgroundColor: "#222" }}
                   className="options-count"
                   value={q.optionsCount}
                   onChange={(e) =>
@@ -362,6 +363,7 @@ const RegistrationForm = () => {
                 <div className="input-group type-field">
                   <label>Type</label>
                   <select
+                    style={{ backgroundColor: "#222" }}
                     value={detail.type}
                     onChange={(e) =>
                       handleTeamDetailTypeChange(index, e.target.value)
@@ -379,6 +381,7 @@ const RegistrationForm = () => {
                 <div>
                   <label>No. of Options:</label>
                   <select
+                    style={{ backgroundColor: "#222" }}
                     value={detail.options.length}
                     onChange={(e) =>
                       handleTeamDetailChange(
