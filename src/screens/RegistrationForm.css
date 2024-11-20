@@ -116,7 +116,7 @@
 
 .submit-button {
   padding: 10px 20px;
-  background-color: #a70e46; /* Yellow/orange */
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
   color: #000; /* Black text */
   border: none;
   cursor: pointer;
@@ -125,10 +125,12 @@
   text-align: center;
   margin-top: 20px;
   border-radius: 5px;
+  transition: background 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
 
 .submit-button:hover {
-  background-color: #ffa500; /* Darker orange on hover */
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
+  box-shadow: 0 4px 30px rgba(167, 14, 70, 5)!important; /* Add shadow on hover */
 }
 
 .team-config-container {
