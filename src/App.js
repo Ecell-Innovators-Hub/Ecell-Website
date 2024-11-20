@@ -113,7 +113,12 @@ const App = () => {
               isLoggedIn ? (
                 <Dashboard isLoggedIn={isLoggedIn} user={user} />
               ) : (
-                <Login /> 
+                <Login
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUser={setUser}
+                  isLoggedIn={isLoggedIn}
+                  user={user}
+                />
               )
             }
           />
