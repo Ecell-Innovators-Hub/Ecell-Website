@@ -1,0 +1,33 @@
+.team-section {
+    margin: 120px 0;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .icon-container {
+    margin-right: 15px;
+    color: #a70e46;
+    font-size: 2rem;
+  }
+  
+  .section-info h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  .section-info p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  

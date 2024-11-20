@@ -18,7 +18,7 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 40px;
-  color: #ffd700;
+  color: #a70e46;
 }
 
 /* Form section layout */
@@ -55,13 +55,13 @@
   cursor: pointer;
   background: none;
   font-size: small;
-  color: #ffd700 !important;
-  border: 1px dashed #ffd700;
+  color: #a70e46 !important;
+  border: 1px dashed #a70e46;
   text-align: center;
 }
 
 .choose-image:hover {
-  background-color: #ffd700;
+  background-color: #a70e46;
   color: #000 !important;
 }
 
@@ -92,7 +92,7 @@ input[type="time"]:focus,
 input[type="file"]:focus,
 textarea:focus,
 select:focus {
-  border-color: #ffd700;
+  border-color: #a70e46;
   outline: none;
 }
 
@@ -128,7 +128,7 @@ textarea {
 }
 
 .radio-buttons input[type="radio"] {
-  accent-color: #ffd700; /* Gold color for radio button */
+  accent-color: #a70e46; /* Gold color for radio button */
   margin-right: 5px;
   width: 16px;
   height: 16px;
@@ -162,12 +162,12 @@ textarea {
   border-radius: 8px;
   cursor: pointer;
   background: none;
-  color: #ffd700;
-  border: 1px dashed #ffd700;
+  color: #a70e46;
+  border: 1px dashed #a70e46;
 }
 
 .add-person:hover {
-  background-color: #ffd700;
+  background-color: #a70e46;
   color: #000;
 }
 
@@ -175,7 +175,7 @@ textarea {
 .add-event-button {
   width: 100%;
   padding: 12px;
-  background-color: #ffd700;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
   color: #000;
   border: none;
   font-weight: bold;
@@ -186,12 +186,12 @@ textarea {
 }
 
 .add-event-button:hover {
-  background-color: #ffa500;
+  background: radial-gradient(circle, #ff3fc2 0%, #a70e46 100%);
 }
 
 .submit-button {
   padding: 10px 20px;
-  background-color: #ffd700; /* Yellow/orange */
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%); /* Yellow/orange */
   color: #000; /* Black text */
   border: none;
   cursor: pointer;
@@ -203,7 +203,7 @@ textarea {
 }
 
 .submit-button:hover {
-  background-color: #ffa500; /* Darker orange on hover */
+  background: radial-gradient(circle, #ff3fc2 0%, #a70e46 100%); /* Darker orange on hover */
 }
 
 /* Global box-sizing */

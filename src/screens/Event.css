@@ -16,13 +16,12 @@
   font-size: 1.0rem;
   border-radius: 8px;
   cursor: pointer;
-  background: none;
-  color: #ffd700;
-  border: 1px dashed #ffd700;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
+  color: #000;
 }
 
 .edit-button:hover {
-  background-color: #ffd700;
+  background: radial-gradient(circle, #ff3fc2 0%, #a70e46 100%);
   color: #000;
 }
 
@@ -91,7 +90,7 @@
   margin: 20px auto;
   padding: 12px 20px;
   border-radius: 10px;
-  background-color: #ffc23c;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
   color: #000;
   border: none;
   cursor: pointer;

@@ -14,7 +14,7 @@
 .login-heading {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #ffc23c;
+  color: #a70e46;
 }
 
 .input-label {
@@ -40,7 +40,7 @@
   margin: 10px 0;
   border: none;
   border-radius: 5px;
-  background-color: #ffc23c;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
   color: #222;
   font-size: 1rem;
   font-weight: bold;
