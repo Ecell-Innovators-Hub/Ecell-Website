@@ -87,3 +87,75 @@
   font-size: 0.875rem;
   color: #a0aec0;
 }
+
+/* Responsive Styles */
+
+/* For medium screens (tablet and below) */
+@media (max-width: 1024px) {
+  .footer-container {
+    flex-direction: column; /* Stack footer sections vertically */
+    text-align: center; /* Center text */
+    padding: 0 15px; /* Add some padding */
+  }
+
+  .footer-logo {
+    margin-bottom: 1rem; /* Space between logo and other sections */
+  }
+
+  .footer-quick-links ul {
+    flex-direction: column; /* Stack links vertically */
+    gap: 0.8rem; /* Adjust spacing */
+  }
+
+  .footer-social-icons {
+    margin-top: 1rem; /* Space between social icons and links */
+    justify-content: center;
+  }
+
+  .footer-logo-text {
+    font-size: 1.3rem; /* Slightly smaller font size */
+  }
+
+  .footer-quick-links a {
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem; /* Adjust font size for smaller screens */
+  }
+}
+
+/* For small screens (mobile phones and below) */
+@media (max-width: 480px) {
+  .footer-container {
+    flex-direction: column; /* Stack sections vertically */
+    text-align: center; /* Center text */
+    padding: 0 10px;
+  }
+
+  .footer-logo img {
+    width: 60px; /* Reduce logo size */
+    height: 60px;
+  }
+
+  .footer-logo-text {
+    font-size: 1.2rem; /* Smaller font size */
+  }
+
+  .footer-quick-links ul {
+    flex-direction: column; /* Stack links vertically */
+    gap: 0.5rem;
+  }
+
+  .footer-quick-links a {
+    font-size: 0.85rem; /* Smaller font size */
+  }
+
+  .footer-icon-wrapper {
+    padding: 0.5rem; /* Smaller social icon padding */
+  }
+
+  .footer-bottom p {
+    font-size: 0.65rem; /* Smaller font size for bottom text */
+  }
+}

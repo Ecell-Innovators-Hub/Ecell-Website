@@ -1,0 +1,12 @@
+.responsive-div {
+    width: 100%;
+    height: 100vh; /* Default for large screens */
+  }
+  
+  @media (max-width: 768px) {
+    .responsive-div {
+      height: 50vh; /* Adjusted height for smaller screens */
+      width: 40%;
+    }
+  }
+  

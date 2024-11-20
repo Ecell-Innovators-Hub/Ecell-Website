@@ -18,4 +18,17 @@
   z-index: -1;
   
 }
+body {
+  padding-top: 150px; /* Same as navbar height */
+}
+
+/* Specific to your headings container */
+.events-header {
+  margin-top: 20px; /* Extra margin to adjust spacing */
+}
+
+/* For headings directly */
+.events-heading {
+  padding-top: 5px; /* Add additional padding if needed */
+}
 

@@ -7,14 +7,14 @@ import './TeamMember.css';
 // Data for team members (replace with your actual data import or objects)
 const faculty = [
   { id: 1, name: "Narasimha Raju", role: "Professor", image: "/nsr sir.jpg", email: "john@example.com", linkedin: "", twitter: ""},
-  { id: 2, name: "Dr. John Doe", role: "Professor", image: "/profile.jpg", email: "john@example.com", linkedin: "", twitter: ""},
+  { id: 2, name: "Murthy", role: "Professor", image: "/profile.jpg", email: "john@example.com", linkedin: "", twitter: ""},
   { id: 3, name: "Preethi", role: "Professor", image: "/preethi madam.jpg", email: "preethi.b@vishnu.edu.in", linkedin: "", twitter: ""},
   // Add more faculty members here
 ];
 
 const heads = [
   { id: 4, name: "Surya Teja", role: "President", image: "/surya.jpg", email: "president.ecell@vishnu.ed.in", linkedin: "https://www.linkedin.com/in/surya-teja-191a81294/"},
-  { id: 5, name: "Jane Smith", role: "Vice President", image: "/profile.jpg", email: "vicepresident.ecell@vishnu.edu.in", linkedin: "https://linkedin.com/in/jane"},// Add more heads here
+  /*{ id: 5, name: "Jane Smith", role: "Vice President", image: "/profile.jpg", email: "vicepresident.ecell@vishnu.edu.in", linkedin: "https://linkedin.com/in/jane"},// Add more heads here*/
   { id: 6, name: "Naga Mallika", role: "Secretary", image: "/mallika.jpg", email: "secretary.ecell@vishnu.edu.in", linkedin: "https://www.linkedin.com/in/naga-mallika-balla-13003b27b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"},
 ];
 const teamLeads = [
@@ -31,18 +31,18 @@ const teamLeads = [
     { id: 15, name: "Yagnasri", role: "PR/Marketing Co-lead", image: "/yagna.jpg", email: "alice@example.com", linkedin: ""},
     { id: 16, name: "Rajkumar", role: "Content & Media Co-lead", image: "/rajkumar.png", email: "alice@example.com", linkedin: "https://www.linkedin.com/in/rajkumar-sirra-941585320"},
     { id: 17, name: "Faiza", role: "Research & Development Co-lead", image: "/faiza.png", email: "alice@example.com", linkedin: "https://www.linkedin.com/in/faiza-mohammed-72697b2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"},
-    { id: 18, name: "Alice Brown", role: "Event Managing Co-lead", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
+    /*{ id: 18, name: "Alice Brown", role: "Event Managing Co-lead", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
     { id: 19, name: "Alice Brown", role: "Startup Liason Co-lead", image: "/profile.jpg", email: "alice@example.com", linkedin: ""},
-    { id: 20, name: "Alice Brown", role: "Logistics & Operations Co-lead", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
+    { id: 20, name: "Alice Brown", role: "Logistics & Operations Co-lead", image: "profile.jpg", email: "alice@example.com", linkedin: ""},*/
   ];
 const teamMembers = [
   { id: 21, name: "Abdul Laikha", role: "Technical Associate", image: "/laikha.png", email: "alice@example.com", linkedin: ""},
   { id: 22, name: "Sohan", role: "PR/Marketing Associate", image: "/sohan.JPG", email: "alice@example.com", linkedin: ""},
-  { id: 23, name: "Alice Brown", role: "Content & Media Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
+  /*{ id: 23, name: "Alice Brown", role: "Content & Media Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
   { id: 24, name: "Alice Brown", role: "Research & Development Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
   { id: 25, name: "Alice Brown", role: "Event Managing Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
   { id: 26, name: "Alice Brown", role: "Startup Liason Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
-  { id: 27, name: "Alice Brown", role: "Logistics & Operations Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},
+  { id: 27, name: "Alice Brown", role: "Logistics & Operations Associate", image: "profile.jpg", email: "alice@example.com", linkedin: ""},*/
   // Add more team members here
 ];
 // TeamLead Component

@@ -8,6 +8,7 @@
   background-color: #000;
   margin-bottom: 60px;
   /* Make container full viewport height for vertical centering */
+  padding: 0 20px; /* Add some padding to prevent content from touching edges */
 }
 
 .event-left {
@@ -20,7 +21,6 @@
 }
 
 .event-image {
-
   border-radius: 50%;
   background: #ccc;
   display: block;
@@ -42,7 +42,7 @@
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  border-radius: 25px; 
+  border-radius: 25px;
   transition: transform 0.3s, background-color 0.3s;
 }
 
@@ -52,10 +52,10 @@
 }
 
 .upcomingid-events {
-    text-align: center;
-    font-size: 16px;
-    margin-top: 10px;
-  }
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+}
 
 .add-to-calendar {
   margin-top: 10px;
@@ -70,4 +70,87 @@
 .Date {
   font-weight: bold;
   font-size: medium;
+}
+
+/* Responsive Styles */
+
+/* For medium screens (tablet and below) */
+@media (max-width: 1024px) {
+  .event-container {
+    flex-direction: column; /* Stack event sections vertically */
+    text-align: center; /* Center the text on smaller screens */
+    padding: 20px 10px;
+  }
+
+  .event-left, .event-right {
+    width: 100%; /* Make both sections take full width */
+  }
+
+  .event-name {
+    font-size: 22px; /* Slightly smaller font size */
+  }
+
+  .register-button {
+    font-size: 1rem; /* Adjust button font size */
+    padding: 12px 25px; /* Adjust padding */
+  }
+
+  .upcomingid-events {
+    font-size: 14px; /* Smaller font size */
+  }
+
+  .add-to-calendar {
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .Heading {
+    margin-left: 15px; /* Adjust margin for smaller screens */
+  }
+
+  .Date {
+    font-size: 14px; /* Adjust date font size */
+  }
+}
+
+/* For small screens (mobile phones and below) */
+@media (max-width: 480px) {
+  .event-container {
+    flex-direction: column; /* Stack event sections vertically */
+    text-align: center; /* Center content */
+    padding: 20px 10px;
+  }
+
+  .event-left, .event-right {
+    width: 100%; /* Full width for both sections */
+  }
+
+  .event-image {
+    width: 100px; /* Reduce image size */
+    height: 100px; /* Keep the image circular */
+  }
+
+  .event-name {
+    font-size: 20px; /* Adjust font size */
+  }
+
+  .register-button {
+    font-size: 0.9rem; /* Smaller button font size */
+    padding: 10px 20px; /* Smaller padding */
+  }
+
+  .upcomingid-events {
+    font-size: 14px; /* Smaller font size */
+  }
+
+  .add-to-calendar {
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .Heading {
+    margin-left: 10px; /* Reduce margin for mobile */
+  }
+
+  .Date {
+    font-size: 12px; /* Smaller date font size */
+  }
 }
