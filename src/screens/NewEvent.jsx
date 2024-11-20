@@ -6,12 +6,14 @@ import { db, storage } from "../firebase";
 import { doc, getDoc, setDoc, collection, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useLocation } from "react-router-dom";
+import Loader from "./../components/Loader";
 
 const NewEvent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const eventId = location.state?.eventId || null;
 
+  const [loading, setLoading] = useState(true); 
   const [persons, setPersons] = useState([
     {
       personType: "student",
@@ -62,7 +64,7 @@ const NewEvent = () => {
             setFirstPrize(eventData.firstPrize || "");
             setSecondPrize(eventData.secondPrize || "");
             setThirdPrize(eventData.thirdPrize || "");
-            setMainImage(eventData.mainImage || ""); // Reset for editing
+            setMainImage(eventData.mainImage || "");
             if (eventData.mainImage) {
               setImagePreview(eventData.mainImage.url);
             }
@@ -82,12 +84,17 @@ const NewEvent = () => {
           }
         } catch (error) {
           console.error("Error fetching event details:", error);
+        } finally {
+          setLoading(false); // Ensure loading is set to false after fetching
         }
+      } else {
+        setLoading(false); // If no eventId, set loading to false
       }
     };
 
     fetchEventDetails();
   }, [eventId]);
+
 
   const handleAddPerson = () => {
     if (persons.length < 2) {
@@ -134,6 +141,7 @@ const NewEvent = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Show loader while saving
     try {
       let mainImageUrl = imagePreview;
 
@@ -197,8 +205,14 @@ const NewEvent = () => {
       }
     } catch (error) {
       console.error("Error saving event:", error);
+    } finally {
+      setLoading(false); // Hide loader after saving
     }
   };
+
+  if (loading) {
+    return <Loader />; // Show loader when loading is true
+  }
 
   return (
     <form className="new-event-container" onSubmit={handleSubmit}>

@@ -35,13 +35,15 @@ const Activities = () => {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    if (observerRef.current) {
-      observer.observe(observerRef.current); // Observe the card
+
+    const observedElement = observerRef.current; // Copy the ref value to a variable
+    if (observedElement) {
+      observer.observe(observedElement); // Observe the card
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current); // Clean up observer on unmount
+      if (observedElement) {
+        observer.unobserve(observedElement); // Clean up observer on unmount
       }
     };
   }, []); // Empty dependency array ensures this runs only once
