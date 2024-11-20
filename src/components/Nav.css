@@ -1,5 +1,4 @@
-/* Nav.css */
-
+/* Global Styles */
 body {
   margin: 0;
   background-color: black; /* Set the complete background to black */
@@ -15,8 +14,8 @@ header {
   left: 0;
   right: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* This ensures logo and menu toggle are spaced out */
+  align-items: center; /* Vertically center them */
   padding: 10px 20px;
   background-color: black;
   z-index: 1000;
@@ -91,24 +90,29 @@ header {
 
 /* Responsive styling */
 @media (max-width: 768px) {
+  body{
+    padding-top: 60px;
+  }
   header {
-    flex-direction: row; /* Ensure all items stay in one row */
-    justify-content: space-between; /* Keep items spaced correctly */
+    flex-direction: row; /* Keep logo and menu toggle in the same row */
+    justify-content: space-between; /* Ensure there's space between the logo and menu toggle */
   }
 
   .logo {
-    flex: 1; /* Allow the logo to take up available space */
+    width: 100%; /* Ensure logo takes full width */
+    text-align: left; /* Align the logo to the left */
   }
 
   .menu-toggle {
     display: inline-block;
     cursor: pointer;
     font-size: 1.5rem;
-    color: #ffffff;
-    padding: 5px 10px;
-    border: 1px solid #ffd700;
+    color: #a70e46;
+    padding: 8px 12px;
+    border: 1px solid #a70e46;
     border-radius: 5px;
-    margin-left: auto; /* Push the toggle to the far right */
+    margin-left: 10px; /* Provide a little space between the logo and the toggle */
+    background-color: transparent;
   }
 
   .nav {
@@ -117,6 +121,7 @@ header {
     width: 100%;
     gap: 10px;
     margin-top: 10px;
+    text-align: center;
   }
 
   .nav.active {
@@ -125,15 +130,14 @@ header {
 
   .nav a {
     font-size: 1rem;
-    padding: 10px;
-    text-align: left;
+    padding: 12px;
+    text-align: center;
+    width: 100%;
   }
 
-  /* Optional hover effect for menu icon */
   .menu-toggle:hover {
-    background-color: #ffd700;
+    background-color: #a70e46;
     color: black;
-
   }
 }
 

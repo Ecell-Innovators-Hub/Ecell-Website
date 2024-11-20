@@ -48,12 +48,12 @@ function Navigator() {
         >
           About
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/contac"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           Contact Us
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/team"
           className={({ isActive }) => (isActive ? "active" : "")}

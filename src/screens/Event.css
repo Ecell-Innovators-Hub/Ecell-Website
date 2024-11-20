@@ -14,10 +14,10 @@
   border-radius: 10px;
   font-weight: bold;
   font-size: 1.0rem;
-  border-radius: 8px;
+  border: 2px #a70e46 dashed;
   cursor: pointer;
-  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
-  color: #000;
+  background: transparent;
+  color: #a70e46;
 }
 
 .edit-button:hover {
