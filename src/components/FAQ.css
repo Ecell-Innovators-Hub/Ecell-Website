@@ -1,0 +1,66 @@
+/* FAQ Section Styles */
+#faq {
+  padding: 50px;
+  /*background-image: url('https://img.freepik.com/free-vector/vibrant-pink-watercolor-painting-background_53876-58931.jpg');*/
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.658); /* Subtle shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin white border */
+}
+
+#faq h2 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff; /* White text for better contrast */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.037); /* Semi-transparent white */
+  backdrop-filter: blur(5px); /* Frosted effect for each item */
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Thin white border for each FAQ item */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+  cursor: pointer;
+  color: #fff; /* Text color for better readability */
+}
+
+.faq-item h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #a70e46; /* Light pink */
+  transition: color 0.3s ease;
+}
+
+.faq-item h3:hover {
+  color: #a5006e; /* Bright white on hover */
+}
+
+.faq-item p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ffffff; /* Soft gray for contrast */
+}
+
+.faq-item.active {
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5); /* Bright active shadow */
+  transform: scale(1.02); /* Slight zoom for active item */
+}
+
+.faq-item.active h3 {
+  color: #a70e46; /* Bright pink when active */
+}

@@ -10,6 +10,11 @@ import Registrations from "./screens/Registrations";
 import Dashboard from "./screens/Dashboard";
 import Login from "./screens/Login";
 import Reg from "./screens/Reg";
+import Object3D from './screens/Object';
+import Team from "./screens/Team";
+import SocialIcons from "./components/SocialIcons";
+import Activities from "./components/Activities";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Manage login state
@@ -84,7 +89,10 @@ const App = () => {
             path="/reg2"
             element={<Reg isLoggedIn={isLoggedIn} user={user} />}
           />
-
+          <Route path="/logo3d" element={<Object3D />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/about" element={<Activities />} />
+          <Route path="/contact" element={<SocialIcons />} />
           {/* Login Route */}
           <Route
             path="/login"
@@ -116,6 +124,7 @@ const App = () => {
           />
         </Routes>
       </div>
+      <SocialIcons />
     </Router>
   );
 };

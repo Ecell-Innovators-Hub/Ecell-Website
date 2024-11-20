@@ -98,8 +98,8 @@ const StyledWrapper = styled.div`
     background: rgb(222, 74, 15);
     background: linear-gradient(
       0deg,
-      rgba(222, 74, 15, 1) 0%,
-      rgba(249, 199, 79, 1) 100%
+      rgba(167, 14, 70, 1) 0%,
+    rgba(167, 14, 70, 1) 100%
     );
     border-radius: calc(var(--height) / 2);
     animation: loading 4s ease-out infinite;

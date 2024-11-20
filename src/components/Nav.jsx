@@ -36,17 +36,29 @@ function Navigator() {
         >
           Events
         </NavLink>
-        <NavLink
+        {/*<NavLink
           to="/case-study"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           Case Study
-        </NavLink>
+        </NavLink>*/}
         <NavLink
-          to="/schemes"
+          to="/about"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          About Team
+          About
+        </NavLink>
+        <NavLink
+          to="/contac"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Contact Us
+        </NavLink>
+        <NavLink
+          to="/team"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Team
         </NavLink>
         {/* <NavLink
           to="/login"
@@ -54,6 +66,7 @@ function Navigator() {
         >
           Login
         </NavLink> */}
+      
       </nav>
     </header>
   );

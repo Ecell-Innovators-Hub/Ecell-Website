@@ -86,7 +86,7 @@ header {
 }
 
 .nav a.active {
-  color: #ffc23c;
+  color: #a70e46;
 }
 
 /* Responsive styling */
@@ -133,11 +133,12 @@ header {
   .menu-toggle:hover {
     background-color: #ffd700;
     color: black;
+
   }
 }
 
 /* Optional hover effect for menu icon */
 .menu-toggle:hover {
-  background-color: #ffd700;
+  background-color: #a70e46;
   color: black;
 }

@@ -16,13 +16,12 @@
   font-size: 1.0rem;
   border-radius: 8px;
   cursor: pointer;
-  background: none;
-  color: #ffd700;
-  border: 1px dashed #ffd700;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
+  color: #000;
 }
 
 .edit-button:hover {
-  background-color: #ffd700;
+  background: radial-gradient(circle, #ff3fc2 0%, #a70e46 100%);
   color: #000;
 }
 
@@ -53,11 +52,9 @@
 
 .prizesid {
   text-align: center;
-  margin-top: 20px;
   font-size: 20px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 15px;
   border-radius: 10px;
 }
 
@@ -93,7 +90,7 @@
   margin: 20px auto;
   padding: 12px 20px;
   border-radius: 10px;
-  background-color: #ffc23c;
+  background: radial-gradient(circle, #ff01aee6 0%, #a70e46 100%);
   color: #000;
   border: none;
   cursor: pointer;
@@ -133,7 +130,6 @@
   text-align: center;
   box-sizing: border-box;
 }
-
 
 
 .organizer-info {
