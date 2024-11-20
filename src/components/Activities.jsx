@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Activities.css";
 
 const Activities = () => {
-  const typewriterElement = useRef(null); // Ref for the element where text will be typed
+  
   const observerRef = useRef(null); // Ref for observing the card
   const index = useRef(0); // Ref for typing index
+  const [typedText, setTypedText] = useState(""); // State to store typed text
   const hasStartedTyping = useRef(false); // Tracks if typing has started
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const Activities = () => {
 
     const typeWriterEffect = () => {
       if (index.current < text.length) {
-        typewriterElement.current.innerHTML += text.charAt(index.current);
+        setTypedText((prev) => prev + text.charAt(index.current));
         index.current++;
         setTimeout(typeWriterEffect, typingSpeed);
       }
@@ -52,7 +53,7 @@ const Activities = () => {
     <div className="activities-container">
       <div className="card" ref={observerRef}>
         <p className="heading">About E-Cell</p>
-        <div id="typewriter" ref={typewriterElement}></div>
+        <div id="typewriter">{typedText}</div>
       </div>
     </div>
   );

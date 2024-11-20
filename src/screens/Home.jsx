@@ -5,6 +5,7 @@ import EventRemainder from "../components/EventRemainder.jsx";
 import Activities from "../components/Activities.jsx";
 import FAQ from "../components/FAQ.jsx";
  import Carousel from "../components/Carousel.jsx"; 
+import Footer from "../components/SocialIcons.jsx";
 
 function Home() {
   return (
@@ -16,8 +17,9 @@ function Home() {
       <h2>Event highlights</h2>
       <Carousel />
       </div>
-      <Activities />
+      <Activities className="about"/>
       <FAQ />
+      <Footer />
     </div>
   );
 }

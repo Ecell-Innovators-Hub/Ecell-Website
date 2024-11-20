@@ -124,7 +124,7 @@ const App = () => {
           />
         </Routes>
       </div>
-      <SocialIcons />
+      
     </Router>
   );
 };

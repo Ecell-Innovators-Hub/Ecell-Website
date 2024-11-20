@@ -1,57 +1,127 @@
 .member-card {
-    background-color: #000000;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 1px 4px #a70e46;
+  background-color: #000000;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 1px 4px #a70e46;
+  margin-bottom: 30px; /* Ensure spacing between cards on all screen sizes */
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 1px 4px #a70e46;
+}
+
+.image-container img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.member-info {
+  padding: 15px;
+}
+
+.member-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.role {
+  font-size: 1rem;
+  color: #a70e46;
+  margin: 5px 0;
+}
+
+.description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+}
+
+.social-link {
+  color: #a70e46;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #a70e46;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .member-card {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 20px; /* Add space between cards */
   }
-  
-  .member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 1px 4px #a70e46,;
-  }
-  
+
   .image-container img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 250px; /* Smaller image height on smaller screens */
   }
-  
+
   .member-info {
-    padding: 15px;
+    padding: 10px;
   }
-  
+
   .member-info h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
+    font-size: 1.3rem; /* Adjust font size for h3 */
   }
-  
+
   .role {
-    font-size: 1rem;
-    color: #a70e46;
-    margin: 5px 0;
+    font-size: 0.9rem; /* Adjust role font size */
   }
-  
+
   .description {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    font-size: 0.8rem; /* Adjust description font size */
   }
-  
+
   .social-links {
-    display: flex;
-    gap: 10px;
+    flex-direction: row; /* Ensure social links are in a row */
   }
-  
+
   .social-link {
-    color: #a70e46;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
+    font-size: 1rem; /* Adjust social link font size */
   }
-  
-  .social-link:hover {
-    color: #a70e46;
+}
+
+@media (max-width: 480px) {
+  .member-card {
+    width: 100%; /* Full width for even smaller screens */
+    margin-bottom: 15px; /* More space between cards */
   }
-  
+
+  .image-container img {
+    height: 200px; /* Further reduced image height */
+  }
+
+  .member-info h3 {
+    font-size: 1.2rem; /* Smaller font size for h3 */
+  }
+
+  .role {
+    font-size: 0.85rem; /* Smaller role font */
+  }
+
+  .description {
+    font-size: 0.75rem; /* Smaller description font */
+  }
+
+  .social-links {
+    flex-direction: row;
+    gap: 8px; /* Reduce space between social links */
+  }
+
+  .social-link {
+    font-size: 0.9rem; /* Smaller social link font */
+  }
+}
